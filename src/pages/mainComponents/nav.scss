@@ -1,0 +1,159 @@
+/*стили панели навигации*/
+nav {
+  background-color: #111518;
+  position: fixed;
+  width: #{"max(614px, 55vw)"};
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.nav_hidden {
+  width: clamp(64px, 5vw, 90px);
+}
+/*стиль кнопки бургера*/
+.nav_btn {
+  margin-top: 32px;
+  margin-left: 16px;
+  min-height: 32px;
+  min-width: 32px;
+
+  /*тут идет анимация кнопки*/
+  :first-child {
+    stroke-dasharray: 60 207;
+    stroke-width: 3;
+  }
+  :nth-child(2) {
+    stroke-dasharray: 60 60;
+    stroke-width: 3;
+  }
+  :last-child {
+    stroke-dasharray: 60 207;
+    stroke-width: 3;
+  }
+}
+.nav_btn path {
+  stroke: #ffffff;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav_btn_off {
+  /*и здесь тоже анимация кнопки*/
+  :first-child {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 3;
+  }
+  :nth-child(2) {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 3;
+  }
+  :last-child {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 3;
+  }
+}
+
+/*элементы навигации - соцсети и другие элементы навигации*/
+.nav_menu {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+.nav_menu_hidden {
+  display: none;
+}
+.nav_menu ul {
+  list-style: none;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 37px;
+  padding-left: #{"max(97px, 17%)"};
+}
+.nav_menu li:hover {
+  color: #0ec261;
+  cursor: pointer;
+}
+.nav_menu_soc-media {
+  padding-left: #{"max(97px, 17%)"};
+}
+
+.nav_menu_soc-media svg {
+  margin-right: 56px;
+}
+.nav_menu_soc-media svg:hover {
+  path {
+    fill: #0ec261;
+  }
+}
+/*кнопка выбора языка*/
+.nav_lang-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 2rem;
+  left: 16px;
+  width: 32px;
+  height: 32px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 15px;
+  color: #0ec261;
+  border: solid 1px transparent;
+  border-radius: 50%;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.nav_lang-select:hover {
+  border: solid 1px #ffffff;
+  border-radius: 50%;
+}
+.nav_lang-select_hidden {
+  display: none;
+}
+/*медиа для планшета*/
+@media screen and (max-width: 1023px) {
+  nav {
+    width: 100vw;
+  }
+}
+/*для телефона*/
+@media screen and (max-width: 767px) {
+  nav {
+    width: 100vw;
+  }
+  .nav_btn {
+    margin-top: 20px;
+  }
+  .nav_btn path {
+    stroke: #111518;
+  }
+  .nav_btn_off path {
+    stroke: #ffffff;
+  }
+  .nav_hidden {
+    width: 0;
+  }
+  .nav_menu ul {
+    padding-left: 16px;
+  }
+  .nav_lang-select {
+    display: none;
+  }
+  .nav_lang-select_hidden {
+    display: flex;
+  }
+  .nav_menu_soc-media {
+    padding: 16px;
+  }
+}
