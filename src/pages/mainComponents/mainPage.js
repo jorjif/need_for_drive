@@ -1,5 +1,6 @@
 import { NavBar } from "./nav.js";
 import { ReactComponent as Geo } from "../icons/geomark.svg";
+import Slider from "./slider/slider.js";
 import "./mainPage.scss";
 function MainPage(props) {
   function orderChange(e) {
@@ -35,6 +36,7 @@ function MainPage(props) {
           </p>
         </footer>
       </div>
+      <Slider />
     </div>
   );
 }

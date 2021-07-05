@@ -1,18 +1,19 @@
 .page {
   min-height: 100%;
+  display: flex;
 }
 .main-page {
+  margin-left: clamp(64px, 4vw, 90px);
   min-height: 100%;
 }
 .main-page_header {
-  margin-left: clamp(64px, 5vw, 90px);
   display: flex;
   width: #{"max(550px, 50vw)"};
   flex-direction: row;
   justify-content: space-between;
   h1 {
     color: #0ec261;
-    padding-left: clamp(32px, 10%, 64px);
+    padding-left: clamp(32px, 4vw, 64px);
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
@@ -32,10 +33,9 @@
 }
 
 .main-page_main {
-  padding-top: clamp(150px, 20vh, 163px);
-  margin-left: clamp(64px, 5vw, 90px);
+  padding-top: clamp(50px, 20vh, 163px);
   width: #{"max(550px, 50vw)"};
-  padding-left: clamp(32px, 10%, 64px);
+  padding-left: clamp(32px, 4vw, 64px);
   font-style: normal;
   font-weight: 300;
   font-size: 26px;
@@ -62,16 +62,15 @@
 }
 .main-page_main_footer {
   display: flex;
-  margin-left: clamp(64px, 5vw, 90px);
   width: #{"max(550px, 50vw)"};
-  padding-left: clamp(32px, 10%, 64px);
+  padding-left: clamp(32px, 4vw, 64px);
   justify-content: space-between;
   font-weight: normal;
   font-size: 13px;
   line-height: 15px;
   color: #999;
   background: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   margin-bottom: 32px;
   a {
