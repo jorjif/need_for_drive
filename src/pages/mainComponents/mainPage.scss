@@ -64,6 +64,7 @@
   display: flex;
   width: #{"max(550px, 50vw)"};
   padding-left: clamp(32px, 4vw, 64px);
+
   justify-content: space-between;
   font-weight: normal;
   font-size: 13px;
@@ -76,6 +77,7 @@
   a {
     color: #121212;
     text-decoration: none;
+    padding-right: 32px;
     &:hover {
       color: #0ec261;
     }
