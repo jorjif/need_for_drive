@@ -3,15 +3,18 @@
   display: flex;
 }
 .main-page {
-  margin-left: clamp(64px, 4vw, 90px);
+  margin-left: clamp(64px, 5vw, 90px);
   min-height: 100%;
+  width: #{"max(550px, 50vw)"};
 }
 .main-page_header {
   display: flex;
   width: #{"max(550px, 50vw)"};
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 32px;
   h1 {
+    margin: 0;
     color: #0ec261;
     padding-left: clamp(32px, 4vw, 64px);
     font-style: normal;
@@ -41,9 +44,7 @@
   font-size: 26px;
   line-height: 30px;
   color: #999;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
   h1 {
     font-weight: bold;
     font-size: 70px;
@@ -62,7 +63,7 @@
 }
 .main-page_main_footer {
   display: flex;
-  width: #{"max(550px, 50vw)"};
+  width: #{"max(500px, 45vw)"};
   padding-left: clamp(32px, 4vw, 64px);
 
   justify-content: space-between;
@@ -89,13 +90,6 @@
     hsl(148, 87%, 41%) 2.61%,
     hsl(158, 96%, 32%) 112.6%
   );
-  background-blend-mode: darken;
-  border-radius: 8px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  text-align: center;
   color: #fff;
   height: 48px;
   width: 250px;
@@ -104,16 +98,31 @@
     outline: none;
     background: linear-gradient(
       90deg,
-      hsl(148, 77%, 41%) 2.61%,
-      hsl(158, 86%, 32%) 112.6%
+      hsl(148, 87%, 31%) 2.61%,
+      hsl(158, 96%, 22%) 112.6%
     );
   }
-  &:focus {
+}
+.main-page_main_order_pressed {
+  background: linear-gradient(
+    90deg,
+    hsl(148, 87%, 25%) 2.61%,
+    hsl(158, 96%, 12%) 112.6%
+  );
+  &:hover {
     outline: none;
+    background: linear-gradient(
+      90deg,
+      hsl(148, 87%, 25%) 2.61%,
+      hsl(158, 96%, 12%) 112.6%
+    );
   }
 }
 
 @media screen and (max-width: 767px) {
+  .main-page {
+    margin: 0;
+  }
   .main-page_header {
     margin: 0;
 
@@ -133,11 +142,10 @@
   }
   .main-page_main {
     margin: auto;
-    margin-top: 10vh;
-    width: 100%;
-    height: 100%;
+    margin-top: 15vh;
+    width: 100vw;
+    height: auto;
     padding: 0;
-
     font-size: 18px;
     line-height: 21px;
     h1,
@@ -172,6 +180,7 @@
       padding-right: 16px;
     }
     a {
+      padding: 0;
       color: #0ec261;
       &hover {
         color: #fff;
