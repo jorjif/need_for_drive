@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
-import { MainPage } from "./pages/mainComponents/mainPage.js";
+import MainPage from "./pages/mainComponents/mainPage.js";
 
 ReactDOM.render(<MainPage />, document.getElementById("root"));
 

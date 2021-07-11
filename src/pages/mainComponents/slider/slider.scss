@@ -1,15 +1,37 @@
+@import "../../../mixins";
 .slider {
   height: 100vh;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
+  @include tablet {
+    display: none;
+  }
+  &_content {
+    height: 100vh;
+    width: 400%;
+    display: flex;
+    z-index: 2;
+  }
+  &_arrow {
+    display: flex;
+    position: absolute;
+    height: 100vh;
+    width: clamp(32px, 3vw, 64px);
+    justify-content: center;
+    background: transparent;
+    cursor: pointer;
+    align-items: center;
+    z-index: 7;
+    &:hover {
+      background-color: hsla(148, 87%, 41%, 0.2);
+    }
+    &_right {
+      right: 0px;
+    }
+  }
 }
-.slider_content {
-  height: 100vh;
-  width: 400%;
-  display: flex;
-  z-index: 2;
-}
+
 .slide {
   height: 100%;
   width: 100%;
@@ -44,23 +66,6 @@
   }
 }
 
-.slider_arrow {
-  display: flex;
-  position: absolute;
-  height: 100vh;
-  width: clamp(32px, 3vw, 64px);
-  justify-content: center;
-  background: transparent;
-  cursor: pointer;
-  align-items: center;
-  z-index: 7;
-  &:hover {
-    background-color: hsla(148, 87%, 41%, 0.2);
-  }
-}
-.slider_arrow_right {
-  right: 0px;
-}
 .slider_button1 {
   background: linear-gradient(90deg, #13493f 0%, #0c7b1b 100%);
   &:hover {
@@ -70,10 +75,17 @@
       hsl(128, 72%, 26%) 100%
     );
   }
+  &_pressed {
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        hsl(169, 39%, 18%) 0%,
+        hsl(128, 62%, 26%) 100%
+      );
+    }
+  }
 }
-.slider_button1_pressed {
-  background: linear-gradient(90deg, hsl(169, 39%, 18%) 0%, hsl(128, 62%, 26%) 100%);
-}
+
 .slider_button2 {
   background: linear-gradient(90deg, #132949 0%, #0c7b67 100%);
   &:hover {
@@ -83,10 +95,17 @@
       hsl(169, 72%, 26%) 100%
     );
   }
+  &_pressed {
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        hsl(216, 39%, 18%) 0%,
+        hsl(169, 62%, 26%) 100%
+      );
+    }
+  }
 }
-.slider_button2_pressed {
-  background: linear-gradient(90deg, hsl(216, 39%, 18%) 0%, hsl(169, 62%, 26%) 100%);
-}
+
 .slider_button3 {
   background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
   &:hover {
@@ -96,10 +115,17 @@
       hsl(335, 72%, 26%) 100%
     );
   }
+  &_pressed {
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        hsl(32, 39%, 18%) 0%,
+        hsl(335, 62%, 26%) 100%
+      );
+    }
+  }
 }
-.slider_button3_pressed {
-  background: linear-gradient(90deg, hsl(32, 39%, 18%) 0%, hsl(335, 62%, 26%) 100%);
-}
+
 .slider_button4 {
   background: linear-gradient(90deg, hsl(263, 59%, 18%) 0%, hsl(295, 82%, 26%) 100%);
   &:hover {
@@ -109,10 +135,18 @@
       hsl(295, 72%, 26%) 100%
     );
   }
+
+  &_pressed {
+    &:hover {
+      background: linear-gradient(
+        90deg,
+        hsl(263, 39%, 18%) 0%,
+        hsl(295, 62%, 26%) 100%
+      );
+    }
+  }
 }
-.slider_button4_pressed {
-  background: linear-gradient(90deg, hsl(263, 39%, 18%) 0%, hsl(295, 62%, 26%) 100%);
-}
+
 .slider_dots {
   position: absolute;
   bottom: 25px;
@@ -120,19 +154,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &_dot {
+    padding: 4px;
+    margin-right: 2px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #fff;
+  }
 }
-.slider_dots_dot {
-  padding: 4px;
-  margin-right: 2px;
-  cursor: pointer;
-  border-radius: 50%;
-  background: #fff;
-}
+
 .active_dot {
   background: hsla(148, 87%, 41%, 1);
-}
-@media screen and (max-width: 1023px) {
-  .slider {
-    display: none;
-  }
 }

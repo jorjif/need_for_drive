@@ -14,6 +14,7 @@ function NavBar(props) {
   });
   const navClass = classNames({
     nav_hidden: !navStatus,
+    nav: true,
   });
   const navMenu = classNames({
     nav_menu: true,
@@ -55,4 +56,4 @@ function NavBar(props) {
     </div>
   );
 }
-export { NavBar };
+export default NavBar;
