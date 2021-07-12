@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import { ReactComponent as MenuButton } from "../icons/menu_btn.svg";
 import { ReactComponent as TelegaIcon } from "../icons/Telegram_white.svg";
 import { ReactComponent as InstaIcon } from "../icons/Instagram_white.svg";
@@ -7,17 +8,35 @@ import "./nav.scss";
 
 function NavBar(props) {
   const [navStatus, setNav] = useState(false);
+  const btnClass = classNames({
+    nav_btn: true,
+    nav_btn_off: navStatus,
+  });
+  const navClass = classNames({
+    nav_hidden: !navStatus,
+    nav: true,
+  });
+  const navMenu = classNames({
+    nav_menu: true,
+    nav_menu_hidden: !navStatus,
+  });
+  const langClass = classNames({
+    "nav_lang-select": true,
+    "nav_lang-select_hidden": navStatus,
+  });
   function toggleMenu() {
     setNav(!navStatus);
   }
+  const deepDarkFantasies = classNames({
+    nav_light: true,
+    nav_dark: navStatus,
+  });
   return (
     <div>
-      <nav className={navStatus ? "" : "nav_hidden"}>
-        <MenuButton
-          className={`nav_btn ${navStatus ? "nav_btn_off" : ""}`}
-          onClick={toggleMenu}
-        />
-        <div className={`nav_menu ${navStatus ? "" : "nav_menu_hidden"}`}>
+      <div className={deepDarkFantasies}></div>
+      <nav className={navClass}>
+        <MenuButton className={btnClass} onClick={toggleMenu} />
+        <div className={navMenu}>
           <ul>
             <li>Парковка</li>
             <li>Страховка</li>
@@ -30,13 +49,11 @@ function NavBar(props) {
             <InstaIcon />
           </div>
         </div>
-        <div
-          className={`nav_lang-select ${navStatus ? "nav_lang-select_hidden" : ""}`}
-        >
+        <div className={langClass}>
           <p>Eng</p>
         </div>
       </nav>
     </div>
   );
 }
-export { NavBar };
+export default NavBar;
