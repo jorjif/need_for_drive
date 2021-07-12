@@ -1,78 +1,59 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 import { ReactComponent as MenuButton } from "../icons/menu_btn.svg";
 import { ReactComponent as TelegaIcon } from "../icons/Telegram_white.svg";
 import { ReactComponent as InstaIcon } from "../icons/Instagram_white.svg";
 import { ReactComponent as FbIcon } from "../icons/Facebook_white.svg";
+import "./nav.scss";
 
 function NavBar(props) {
   const [navStatus, setNav] = useState(false);
+  const btnClass = classNames({
+    nav_btn: true,
+    nav_btn_off: navStatus,
+  });
+  const navClass = classNames({
+    nav_hidden: !navStatus,
+    nav: true,
+  });
+  const navMenu = classNames({
+    nav_menu: true,
+    nav_menu_hidden: !navStatus,
+  });
+  const langClass = classNames({
+    "nav_lang-select": true,
+    "nav_lang-select_hidden": navStatus,
+  });
   function toggleMenu() {
     setNav(!navStatus);
   }
+  const deepDarkFantasies = classNames({
+    nav_light: true,
+    nav_dark: navStatus,
+  });
   return (
     <div>
-      <nav>
-        <MenuButton className="menu_btn" onClick={toggleMenu} />
-        <div className="menu">
+      <div className={deepDarkFantasies}></div>
+      <nav className={navClass}>
+        <MenuButton className={btnClass} onClick={toggleMenu} />
+        <div className={navMenu}>
           <ul>
             <li>Парковка</li>
             <li>Страховка</li>
             <li>Бензин</li>
             <li>Обслуживание</li>
           </ul>
-          <div className="soc_media">
+          <div className="nav_menu_soc-media">
             <TelegaIcon />
             <FbIcon />
             <InstaIcon />
           </div>
         </div>
-        <div className="lang_select">
-          <p href="#">Eng</p>
+        <div className={langClass}>
+          <p>Eng</p>
         </div>
       </nav>
-      <style jsx>{`
-        nav {
-          background-color: #111518;
-          position: absolute;
-          width: ${navStatus ? "max(614px, 55vw)" : "clamp(64px ,5vw, 90px)"};
-          height: 100vh;
-          left: 0px;
-          top: 0px;
-          color: #ffffff;
-        }
-        .menu_btn {
-          padding-left: 16px;
-          padding-top: 32px;
-        }
-        .menu {
-          display: ${navStatus ? "flex" : "none"};
-          flex-direction: column;
-          padding-left: max(97px, 17%);
-          margin: auto;
-        }
-        .menu ul {
-          list-style: none;
-          font-family: Roboto;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 32px;
-          line-height: 37px;
-
-          padding: 0;
-        }
-        .soc_media {
-          padding: 0;
-        }
-        .soc_media svg {
-          margin-right: 56px;
-        }
-        .lang_select {
-          position: absolute;
-          bottom: 0;
-          left: 16px;
-        }
-      `}</style>
     </div>
   );
 }
-export { NavBar };
+export default NavBar;

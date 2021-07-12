@@ -1,5 +1,15 @@
-import { NavBar } from "./nav.js";
-function MainPage(props) {
-  return <NavBar />;
+import React from "react";
+import NavBar from "./nav.js";
+import Slider from "./slider/slider.js";
+import MainPageContent from "./mainPageContent.js";
+
+function mainPage() {
+  return (
+    <div className="page">
+      <NavBar />
+      <MainPageContent />
+      <Slider />
+    </div>
+  );
 }
-export { MainPage };
+export default mainPage;
