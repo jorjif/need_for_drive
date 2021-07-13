@@ -1,0 +1,43 @@
+.order {
+  margin-left: clamp(64px, 5vw, 90px);
+  &_adress {
+    width: #{"max(550px, 70vw)"};
+    margin-left: clamp(64px, 5vw, 90px);
+  }
+  &_price {
+    width: auto;
+    border-left: 1px solid #eeeeee;
+    padding-left: 32px;
+    h1 {
+      font-size: 18px;
+      line-height: 21px;
+      text-align: right;
+    }
+    &_next {
+      background: linear-gradient(
+        90deg,
+        hsl(148, 87%, 41%) 2.61%,
+        hsl(158, 96%, 32%) 112.6%
+      );
+      color: #fff;
+      &:hover {
+        outline: none;
+        background: linear-gradient(
+          90deg,
+          hsl(148, 87%, 31%) 2.61%,
+          hsl(158, 96%, 22%) 112.6%
+        );
+      }
+      &_pressed {
+        &:hover {
+          outline: none;
+          background: linear-gradient(
+            90deg,
+            hsl(148, 87%, 25%) 2.61%,
+            hsl(158, 96%, 12%) 112.6%
+          );
+        }
+      }
+    }
+  }
+}

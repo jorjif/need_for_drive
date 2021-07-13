@@ -1,8 +1,5 @@
 @import "../../mixins";
-.page {
-  min-height: 100%;
-  display: flex;
-}
+
 .main-page {
   margin-left: clamp(64px, 5vw, 90px);
   min-height: 100%;
@@ -186,5 +183,3 @@
     }
   }
 }
-
-
