@@ -5,7 +5,7 @@
     margin-left: clamp(64px, 5vw, 90px);
   }
   &_price {
-    width: auto;
+    width: clamp(200px, 20vw, 287px);
     border-left: 1px solid #eeeeee;
     padding-left: 32px;
     h1 {
@@ -19,6 +19,7 @@
         hsl(148, 87%, 41%) 2.61%,
         hsl(158, 96%, 32%) 112.6%
       );
+      width: 100%;
       color: #fff;
       &:hover {
         outline: none;
@@ -37,6 +38,39 @@
             hsl(158, 96%, 12%) 112.6%
           );
         }
+      }
+    }
+    &_prices {
+      ul {
+        padding: 0;
+      }
+    }
+    &_list {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 16px;
+
+      &_name {
+        font-size: 14px;
+        line-height: 16px;
+        color: #121212;
+        margin: 0;
+        white-space: nowrap;
+      }
+      &_dots {
+        border-bottom: #999999 dotted 1px;
+        width: 100%;
+      }
+      &_value {
+        font-size: 14px;
+        line-height: 16px;
+        text-align: right;
+        width: auto;
+        height: auto;
+        color: #999;
+        margin: 0;
       }
     }
   }

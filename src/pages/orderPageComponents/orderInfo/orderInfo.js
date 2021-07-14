@@ -6,7 +6,14 @@ function OrderInfo(props) {
     <div className="order_price">
       <h1>Ваш заказ:</h1>
       <div className="order_price_prices">
-        <ul>{/*тут будет список из опций имеющих цену*/}</ul>
+        <ul>
+          {
+            <OrderOptions
+              optionName="Пункт выдачи:"
+              optionValue="Ульяновск, Нариманова&nbsp;42"
+            />
+          }
+        </ul>
       </div>
       <div className="order_price_final">
         <p>Цена: {/*тут будет итоговая цена*/}</p>
