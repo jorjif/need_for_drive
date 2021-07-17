@@ -1,6 +1,7 @@
 import Button from "../../mainComponents/standartButton";
 import OrderOptions from "./priceList";
 import "./orderInfo.scss";
+import { Link } from "react-router-dom";
 function OrderInfo(props) {
   return (
     <div className="order_price">
@@ -16,13 +17,17 @@ function OrderInfo(props) {
         </ul>
       </div>
       <div className="order_price_final">
-        <p>Цена: {/*тут будет итоговая цена*/}</p>
+        <p>
+          <span>Цена:</span> от 8 000 до 12 000
+        </p>
       </div>
-      <Button
-        classes="order_price_next"
-        pressed="order_price_next_pressed"
-        msg="Выбрать модель"
-      />
+      <Link to={props.link}>
+        <Button
+          classes="order_price_next"
+          pressed="order_price_next_pressed"
+          msg={props.btnContent}
+        />
+      </Link>
     </div>
   );
 }

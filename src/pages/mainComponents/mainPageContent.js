@@ -16,7 +16,7 @@ function MainPageContent(props) {
         <h1>Каршеринг</h1>
         <h2>Need for drive</h2>
         <p>Поминутная аренда авто твоего города</p>
-        <Link to="/order">
+        <Link to="/order/adress">
           <Button
             classes="main-page_main_order "
             msg="Забронировать"
