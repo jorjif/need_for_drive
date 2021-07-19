@@ -3,18 +3,16 @@ import OrderOptions from "./priceList";
 import "./orderInfo.scss";
 import { Link } from "react-router-dom";
 function OrderInfo(props) {
+  const order = []; //массив с OrderOptions - деталями заказа, который составляет пользователь
+  for (const [key, value] of Object.entries(props.order)) {
+    //цикл через объект содержащий детали заказа
+    order.push(<OrderOptions key={key} optionName={key} optionValue={value} />);
+  }
   return (
     <div className="order_price">
       <h1>Ваш заказ:</h1>
       <div className="order_price_prices">
-        <ul>
-          {
-            <OrderOptions
-              optionName="Пункт выдачи:"
-              optionValue="Ульяновск, Нариманова&nbsp;42"
-            />
-          }
-        </ul>
+        <ul>{order}</ul>
       </div>
       <div className="order_price_final">
         <p>

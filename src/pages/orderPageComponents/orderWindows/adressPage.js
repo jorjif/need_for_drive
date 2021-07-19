@@ -2,10 +2,11 @@ import AdressSelect from "./adressSelect";
 import OrderInfo from "../orderInfo/orderInfo";
 
 function AdressPage(props) {
+  const adress = { "Пункт выдачи": "Ульяновск, Нариманова\u00A042" };
   return (
     <div className="page_order_content">
       <AdressSelect />
-      <OrderInfo link="/order/cars" btnContent="Выбрать модель" />
+      <OrderInfo link="/order/cars" btnContent="Выбрать модель" order={adress} />
     </div>
   );
 }

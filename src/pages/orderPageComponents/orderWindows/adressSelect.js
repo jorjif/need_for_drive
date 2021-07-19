@@ -5,7 +5,7 @@ function AdressSelect() {
     <div className="order_adress">
       <div className="order_adress_search">
         <div className="order_adress_search_input">
-          <label for="order_adress_search_city">Город:</label>
+          <label htmlFor="order_adress_city">Город:</label>
           <input
             list="order_adress_city"
             className="order_adress_search_input_textfield"
@@ -18,7 +18,7 @@ function AdressSelect() {
           </button>
         </div>
         <div className="order_adress_search_input">
-          <label>Пункт выдачи:</label>
+          <label htmlFor="order_adress_street">Пункт выдачи:</label>
           <input
             list="order_adress_street"
             className="order_adress_search_input_textfield"
