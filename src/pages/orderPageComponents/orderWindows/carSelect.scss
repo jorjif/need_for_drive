@@ -1,0 +1,69 @@
+@import "../../../mixins.scss";
+.order_cars {
+  padding-left: 64px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include phone {
+    padding-left: 2vw;
+  }
+  &_form {
+    width: 100%;
+    max-width: 290px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    :first-child {
+      margin-left: 0;
+    }
+  }
+  &_list {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    @include phone {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.order_card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #eee;
+  max-width: 368px;
+  max-height: 225px;
+  box-sizing: border-box;
+  @include phone {
+    width: 96vw;
+    height: auto;
+  }
+  &_name {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 21px;
+    color: #121212;
+    margin: 0;
+  }
+  &_price {
+    font-size: 14px;
+    font-weight: normal;
+    color: #999999;
+    margin: 0;
+  }
+  &_image {
+    align-self: flex-end;
+  }
+  &:hover {
+    border: 1px solid #999;
+  }
+  &_focused {
+    border: 1px solid #0ec261;
+    &:hover {
+      border: 1px solid hsl(148, 87%, 31%);
+    }
+  }
+}

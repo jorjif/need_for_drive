@@ -23,6 +23,7 @@
     cursor: pointer;
     align-items: center;
     z-index: 7;
+    transition: background-color 0.2s;
     &:hover {
       background-color: hsla(148, 87%, 41%, 0.2);
     }

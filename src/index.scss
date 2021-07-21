@@ -1,3 +1,4 @@
+@import "./mixins.scss";
 html {
   height: 100vh;
 }
@@ -45,5 +46,57 @@ code {
   }
   &:focus {
     outline: none;
+  }
+}
+.radio {
+  &_checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: solid 1px #999;
+  }
+  &_label {
+    font-size: 14px;
+    line-height: 16px;
+    color: #999999;
+    cursor: pointer;
+  }
+  &_container {
+    margin-left: 16px;
+    padding-left: 20px;
+    display: block;
+    position: relative;
+    margin-bottom: 16px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @include phone {
+      margin-left: 8px;
+    }
+    input {
+      position: absolute;
+      top: -5px;
+      left: -9px;
+      opacity: 0;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      &:checked {
+        ~ .radio_checkmark {
+          border: solid 3px #0ec261;
+          width: 9px;
+          height: 9px;
+        }
+        ~ .radio_label {
+          color: #121212;
+        }
+      }
+    }
   }
 }

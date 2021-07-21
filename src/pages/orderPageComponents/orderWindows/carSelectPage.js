@@ -1,5 +1,6 @@
 import OrderInfo from "../orderInfo/orderInfo";
 import CarSelect from "./carSelect";
+import "./carSelect.scss";
 
 function CarsPage(props) {
   const order = {
@@ -9,7 +10,7 @@ function CarsPage(props) {
   return (
     <div className="page_order_content">
       <CarSelect />
-      <OrderInfo btnContent="Дополнительно" order={order} />
+      <OrderInfo btnContent="Дополнительно" order={order} link="/order/options" />
     </div>
   );
 }
