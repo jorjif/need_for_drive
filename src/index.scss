@@ -41,6 +41,7 @@ code {
   width: 250px;
   border: unset;
   cursor: pointer;
+  transition: border 0.2s;
   &:hover {
     outline: none;
   }

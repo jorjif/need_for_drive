@@ -6,17 +6,21 @@
     &_header {
       display: flex;
       justify-content: space-between;
-      max-width: 1247px;
+      width: 100%;
+      max-width: 1055px;
+      padding-left: 64px;
       @include phone {
         flex-direction: column;
         align-items: flex-end;
+      }
+      @include ultrawide {
+        padding-left: #{"max(64px, 20vw)"};
       }
       h1 {
         font-size: 30px;
         line-height: 35px;
         color: #0ec261;
         /*padding-left: #{"max(64px, 10vw)"};*/
-        padding-left: 64px;
         font-weight: bold;
         @include phone {
           margin: 0;
@@ -57,6 +61,9 @@
           color: hsl(148, 87%, 41%);
           @include phone {
             padding-left: 16px;
+          }
+          @include ultrawide {
+            padding-left: #{"max(64px, 20vw)"};
           }
         }
       }
