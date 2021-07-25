@@ -22,12 +22,12 @@
 .order {
   /*отображает выбранные опции и итоговую цену в заказе*/
   &_price {
-    width: clamp(250px, 20vw, 287px);
+    width: clamp(300px, 20vw, 351px);
     border-left: 1px solid #eeeeee;
     padding-left: 32px;
     padding-right: 32px;
     height: 100%;
-    margin-left: clamp();
+    margin-left: clamp(64px, 13vw, 192px);
     @include phone {
       margin: 0;
       padding: 0;

@@ -80,6 +80,9 @@ code {
     @include phone {
       margin-left: 8px;
     }
+    &:first-child {
+      margin: 0;
+    }
     input {
       position: absolute;
       top: -5px;
