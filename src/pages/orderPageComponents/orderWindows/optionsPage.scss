@@ -6,7 +6,8 @@
   }
 }
 .order_options {
-  width: 100%;
+  width: 60%;
+  min-width: 300px;
   height: 100%;
   max-width: 736px;
   @include orderPadding();

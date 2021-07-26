@@ -22,7 +22,7 @@
 .order {
   /*отображает выбранные опции и итоговую цену в заказе*/
   &_price {
-    width: clamp(300px, 20vw, 351px);
+    width: clamp(250px, 20vw, 287px);
     border-left: 1px solid #eeeeee;
     padding-left: 32px;
     padding-right: 32px;
