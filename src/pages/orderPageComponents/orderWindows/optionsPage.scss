@@ -11,6 +11,9 @@
   height: 100%;
   max-width: 736px;
   @include orderPadding();
+  @include phone {
+    padding-left: 0;
+  }
   fieldset {
     border: none;
     padding: 0;
@@ -25,6 +28,9 @@
     &_inpField {
       display: flex;
       flex-direction: row;
+      @include phone {
+        justify-content: space-between;
+      }
     }
   }
 

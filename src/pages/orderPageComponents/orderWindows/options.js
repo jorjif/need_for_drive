@@ -1,4 +1,5 @@
 import { ReactComponent as Delete } from "../../icons/deleteCross.svg";
+import { ReactComponent as CheckboxMark } from "../../icons/checkboxMark.svg";
 export default function Options(props) {
   return (
     <div className="order_options">
@@ -120,17 +121,38 @@ export default function Options(props) {
         <div className="order_options_options">
           <fieldset>
             <legend>Доп услуги</legend>
-            <label htmlFor="full">
-              <input type="checkbox" id="full" />
-              <label htmlFor="full">Полный бак, 500р</label>
+            <label htmlFor="full" className="checkbox">
+              <span className="checkbox_input">
+                <input type="checkbox" id="full" />
+                <span className="checkbox_control">
+                  <CheckboxMark />
+                </span>
+              </span>
+              <label htmlFor="full" className="checkbox_label">
+                Полный бак, 500р
+              </label>
             </label>
-            <label htmlFor="childseat">
-              <input type="checkbox" id="childseat" />
-              <label htmlFor="childseat">Детское кресло, 200р</label>
+            <label htmlFor="childseat" className="checkbox">
+              <span className="checkbox_input">
+                <input type="checkbox" id="childseat" />
+                <span className="checkbox_control">
+                  <CheckboxMark />
+                </span>
+              </span>
+              <label htmlFor="childseat" className="checkbox_label">
+                Детское кресло, 200р
+              </label>
             </label>
-            <label htmlFor="jdm">
-              <input type="checkbox" id="jdm" />
-              <label htmlFor="jdm">Правый руль, 1600р</label>
+            <label htmlFor="jdm" className="checkbox">
+              <span className="checkbox_input">
+                <input type="checkbox" id="jdm" />
+                <span className="checkbox_control">
+                  <CheckboxMark />
+                </span>
+              </span>
+              <label htmlFor="jdm" className="checkbox_label">
+                Правый руль, 1600р
+              </label>
             </label>
           </fieldset>
         </div>

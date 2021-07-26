@@ -104,3 +104,42 @@ code {
     }
   }
 }
+.checkbox {
+  display: grid;
+  grid-template-columns: min-content auto;
+  gap: 8px;
+  &_input {
+    display: grid;
+    grid-template-areas: "checkbox";
+    > * {
+      grid-area: checkbox;
+    }
+    input {
+      opacity: 0;
+      width: 1em;
+      height: 1em;
+      &:checked + .checkbox_control {
+        border: 1px solid #0ec261;
+        svg {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+  &_control {
+    display: inline-grid;
+    width: 12px;
+    height: 12px;
+    border-radius: 0;
+    border: 1px solid #999;
+    svg {
+      margin-left: 2px;
+      transition: transform 0.1s ease-in 25ms;
+      transform: scale(0);
+      transform-origin: bottom left;
+    }
+  }
+  &_label {
+    cursor: pointer;
+  }
+}
