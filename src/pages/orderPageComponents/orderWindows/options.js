@@ -1,6 +1,11 @@
 import { ReactComponent as Delete } from "../../icons/deleteCross.svg";
 import { ReactComponent as CheckboxMark } from "../../icons/checkboxMark.svg";
+import DateTimePicker from "react-datetime-picker";
+import { useState } from "react";
 export default function Options(props) {
+  const [dateFrom, setDateFrom] = useState(new Date());
+
+  const [dateTo, setDateTo] = useState(new Date());
   return (
     <div className="order_options">
       <form>
@@ -57,31 +62,30 @@ export default function Options(props) {
             <div className="order_options_date_form">
               <div className="order_options_date_form_input">
                 <label htmlFor="order_date_from">С</label>
-                <input
-                  placeholder="Введите дату и время"
+                <DateTimePicker
+                  minDate={new Date()}
+                  calendarIcon={null}
+                  value={dateFrom}
+                  onChange={setDateFrom}
                   type="datetime-local"
                   list="order_date_from"
-                  pattern="[0-9]{2}.[0-9]{2}.[0-9]{4} [0-9]{2}:[0-9]{2}"
                   className="order_options_date_form_input_textfield"
+                  clearIcon={<Delete />}
+                  format="dd.MM.y hh:mm"
                 />
-
-                <button className="order_options_date_form_input_delete">
-                  <Delete />
-                </button>
               </div>
               <div className="order_options_date_form_input">
                 <label htmlFor="order_date_to">По</label>
-                <input
+                <DateTimePicker
+                  minDate={new Date()}
+                  calendarIcon={null}
+                  value={dateTo}
+                  onChange={setDateTo}
                   type="datetime-local"
-                  list="order_date_to"
-                  placeholder="Введите дату и время"
-                  pattern="[0-9]{2}.[0-9]{2}.[0-9]{4} [0-9]{2}:[0-9]{2}"
+                  list="order_date_from"
                   className="order_options_date_form_input_textfield"
+                  clearIcon={<Delete />}
                 />
-
-                <button className="order_options_date_form_input_delete">
-                  <Delete />
-                </button>
               </div>
             </div>
           </fieldset>

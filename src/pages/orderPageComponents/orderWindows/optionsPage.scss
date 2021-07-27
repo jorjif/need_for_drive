@@ -67,6 +67,9 @@
           width: 224px;
           border: none;
           border-bottom: 1px solid #999;
+          div {
+            border: none !important;
+          }
         }
         &_delete {
           background: none;
