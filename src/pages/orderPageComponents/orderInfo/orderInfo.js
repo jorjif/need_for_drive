@@ -8,6 +8,29 @@ function OrderInfo(props) {
     //цикл через объект содержащий детали заказа
     order.push(<OrderOptions key={key} optionName={key} optionValue={value} />);
   }
+  //функция отвечает за рендер кнопки - будет ли это link или обычная кнопка
+  const buttonType = () => {
+    if (props.confirmation === true) {
+      //в случае если вкладка - подтверждение заказа, пускаем пропс confirmation={true}
+      return (
+        <Button
+          classes="order_price_next"
+          pressed="order_price_next_pressed"
+          msg={props.btnContent}
+        />
+      );
+    }
+    //во всех остальных случаях, пропса нет, рендерится линк
+    return (
+      <Link to={props.link}>
+        <Button
+          classes="order_price_next"
+          pressed="order_price_next_pressed"
+          msg={props.btnContent}
+        />
+      </Link>
+    );
+  };
   return (
     <div className="order_price">
       <h1>Ваш заказ:</h1>
@@ -18,14 +41,8 @@ function OrderInfo(props) {
         <p>
           <span>Цена:</span> от 8 000 до 12 000
         </p>
+        {buttonType()}
       </div>
-      <Link to={props.link}>
-        <Button
-          classes="order_price_next"
-          pressed="order_price_next_pressed"
-          msg={props.btnContent}
-        />
-      </Link>
     </div>
   );
 }
