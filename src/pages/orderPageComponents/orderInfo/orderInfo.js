@@ -13,10 +13,12 @@ function OrderInfo(props) {
   const buttonType = () => {
     if (props.confirmation === true) {
       //в случае если вкладка - подтверждение заказа, пускаем пропс confirmation={true}
+      //проверяет сообщение кнопки. На основании этого выбирает какой класс подставить
       const classes =
         props.btnContent === "Отменить"
           ? "order_price_next_cancel"
           : "order_price_next";
+      //то же, но для класса нажатой кнопки
       const pressedClass =
         props.btnContent === "Отменить"
           ? "order_price_next_cancel_pressed"

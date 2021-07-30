@@ -4,6 +4,7 @@ import "../../index.scss";
 import OrderHeader from "./orderHeader/orderHeader";
 import { useState } from "react";
 function Order() {
+  //стейт с состоянием заказа - подтвержден/нет
   const [orderConfirmed, setConfirmed] = useState(false);
   function confirmation() {
     setConfirmed((state) => !state);

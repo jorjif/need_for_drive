@@ -7,11 +7,15 @@ import { useState } from "react";
 import classNames from "classnames";
 
 export default function OrderConfirmPage(props) {
+  //стейт состояния всплывающего окна. Отвечает только за это
   const [confirmOpen, setConfirmOpen] = useState(true);
+  //функция, которая меняет стейт на противоположный. Нужна для закрытия всплывающего окна
+  //возможности менять стейт снизу
   function handleOpen() {
     setConfirmOpen((state) => !state);
     console.log(confirmOpen);
   }
+  //функция для кнопки подтверждения. Меняет состояние заказа на выполненный, после этого закрывает окно подтверждения
   function confirmEvent() {
     handleOpen();
     props.confirmEvent();
@@ -21,6 +25,7 @@ export default function OrderConfirmPage(props) {
     order_confirm_closedPopup: confirmOpen,
     order_confirm_popup: true,
   });
+  //макет с информацией о заказе
   const orderBoilerplate = {
     "Пункт выдачи": "Ульяновск, Нариманова\u00A042",
     Модель: "Hyundai,\u00A0i30N",
@@ -29,6 +34,7 @@ export default function OrderConfirmPage(props) {
     Тариф: "На\u00A0сутки",
     "Полный бак": "Да",
   };
+  //макет с информацией о выбранном авто
   const selectedCarBoilerplate = {
     model: "Hyndai, i30 N",
     number: "K 761 HA 73",
