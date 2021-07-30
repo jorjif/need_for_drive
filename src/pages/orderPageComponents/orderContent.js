@@ -6,7 +6,15 @@ import OrderConfirmPage from "./orderWindows/orderConfirmPage";
 function OrderContent(props) {
   return (
     <Switch>
-      <Route path="/order/confirm" render={() => <OrderConfirmPage />} />
+      <Route
+        path="/order/confirm"
+        render={() => (
+          <OrderConfirmPage
+            confirmEvent={props.confirmEvent}
+            isConfirmed={props.isConfirmed}
+          />
+        )}
+      />
       <Route path="/order/options/" render={() => <OptionsPage />} />
       <Route path="/order/cars/" render={() => <CarsPage />} />
       <Route path="/order/adress/" render={() => <AdressPage />} />

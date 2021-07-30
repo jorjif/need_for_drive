@@ -9,6 +9,7 @@ export default function ConfirmationPopup(props) {
             classes="order_confirm_popup_accept"
             msg="Подтвердить"
             pressed="order_confirm_popup_accept_pressed"
+            onClick={props.confirmEvent}
           />
           <Button
             classes="order_confirm_popup_cancel"

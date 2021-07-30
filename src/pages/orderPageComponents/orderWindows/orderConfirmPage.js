@@ -12,6 +12,11 @@ export default function OrderConfirmPage(props) {
     setConfirmOpen((state) => !state);
     console.log(confirmOpen);
   }
+  function confirmEvent() {
+    handleOpen();
+    props.confirmEvent();
+  }
+
   const popUp = classNames({
     order_confirm_closedPopup: confirmOpen,
     order_confirm_popup: true,
@@ -32,13 +37,17 @@ export default function OrderConfirmPage(props) {
   };
   return (
     <div className="page_order_content">
-      <ConfirmationPopup classes={popUp} cancelEvent={handleOpen} />
+      <ConfirmationPopup
+        classes={popUp}
+        confirmEvent={confirmEvent}
+        cancelEvent={handleOpen}
+      />
       <OrderConfirm info={selectedCarBoilerplate} image={car2} />
       <OrderInfo
-        btnContent="Заказать"
+        btnContent={props.isConfirmed ? "Отменить" : "Заказать"}
         order={orderBoilerplate}
         confirmation={true}
-        btnClick={handleOpen}
+        btnClick={props.isConfirmed ? props.confirmEvent : handleOpen}
       />
     </div>
   );
