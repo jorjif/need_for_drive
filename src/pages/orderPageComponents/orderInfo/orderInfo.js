@@ -2,6 +2,7 @@ import Button from "../../mainComponents/standartButton";
 import OrderOptions from "./priceList";
 import "./orderInfo.scss";
 import { Link } from "react-router-dom";
+
 function OrderInfo(props) {
   const order = []; //массив с OrderOptions - деталями заказа, который составляет пользователь
   for (const [key, value] of Object.entries(props.order)) {
@@ -17,6 +18,7 @@ function OrderInfo(props) {
           classes="order_price_next"
           pressed="order_price_next_pressed"
           msg={props.btnContent}
+          onClick={props.btnClick}
         />
       );
     }

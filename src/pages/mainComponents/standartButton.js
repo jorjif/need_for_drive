@@ -16,6 +16,7 @@ function Button(props) {
       className={btnClass}
       onMouseDown={() => setPressed(true)}
       onMouseUp={() => setPressed(false)}
+      onClick={props.onClick}
     >
       {props.msg}
     </button>

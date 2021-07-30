@@ -5,11 +5,11 @@ export default function OrderConfirm(props) {
         <h1 className="order_confirm_info_car">{props.info.model}</h1>
         <p className="order_confirm_info_plate">{props.info.number}</p>
         <p className="order_confirm_info_additional">
-          <span>Топливо:</span>
+          <span>Топливо </span>
           {props.info.fuel}%
         </p>
         <p className="order_confirm_info_additional">
-          <span>Доступна с</span>
+          <span>Доступна с </span>
           {props.info.time}
         </p>
       </div>
