@@ -1,8 +1,7 @@
 @import "../../../mixins.scss";
-/*содержимое страницы кроме сайдбара*/
 .page_order {
   padding-left: clamp(64px, 5vw, 90px);
-  width: auto;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,139 +20,14 @@
   }
 }
 .order {
-  &_header {
-    /*заголовок страницы - геолокация, навбар*/
-    width: 100%;
-    &_header {
-      display: flex;
-      justify-content: space-between;
-      max-width: 1247px;
-      @include phone {
-        flex-direction: column;
-        align-items: flex-end;
-      }
-      h1 {
-        font-size: 30px;
-        line-height: 35px;
-        color: #0ec261;
-        /*padding-left: #{"max(64px, 10vw)"};*/
-        padding-left: 64px;
-        font-weight: bold;
-        @include phone {
-          margin: 0;
-          margin-top: 16px;
-          margin-right: 16px;
-        }
-      }
-    }
-
-    &_nav {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 32px;
-      border: 1px solid #eeeeee;
-      border-right: 0;
-      border-left: 0;
-      @include phone {
-        flex-direction: column;
-        height: auto;
-        margin-top: 16px;
-        svg {
-          display: none;
-        }
-      }
-      &_element {
-        margin: 0;
-        padding: 0 16px;
-        color: #999999;
-        font-weight: bold;
-
-        @include phone {
-          padding: 0 8px;
-        }
-
-        &_first {
-          padding-left: 64px;
-          color: hsl(148, 87%, 41%);
-          @include phone {
-            padding-left: 16px;
-          }
-        }
-      }
-    }
-  }
-  /* основной контент страницы заказа*/
-  &_adress {
-    width: #{"max(550px, 70vw)"};
-    width: fit-content;
-    max-width: 736px;
-    display: flex;
-    flex-direction: column;
-    /*padding-left: #{"max(64px, 10vw)"};*/
-    /*padding-right: #{"min(192px, 13vw)"};*/
-    padding-left: 64px;
-    @include phone {
-      padding-left: 0;
-      align-self: center;
-      width: 100%;
-    }
-    &_search {
-      /*ширина такая чтоб инпуты корректно равнялись по длине поля ввода*/
-      margin-top: 32px;
-      width: fit-content;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      @include phone {
-        align-items: flex-start;
-      }
-      &_input {
-        display: flex;
-        align-items: flex-end;
-        margin-top: 16px;
-        @include phone {
-          align-items: center;
-        }
-        label {
-          text-align: end;
-          @include phone {
-            text-align: start;
-            width: 50px;
-          }
-        }
-        &_textfield {
-          outline: none;
-          margin-left: 8px;
-          width: 224px;
-          border: none;
-          border-bottom: 1px solid #999;
-        }
-        &_delete {
-          background: none;
-          border: none;
-          border-bottom: 1px solid #999;
-        }
-      }
-    }
-    &_map {
-      p {
-        margin-top: 16px;
-      }
-      &_map {
-        width: clamp(300px, 48vw, 736px);
-        height: auto;
-        padding-top: 16px;
-      }
-    }
-  }
   /*отображает выбранные опции и итоговую цену в заказе*/
   &_price {
-    width: clamp(200px, 20vw, 287px);
+    width: clamp(250px, 20vw, 287px);
     border-left: 1px solid #eeeeee;
     padding-left: 32px;
+    padding-right: 32px;
     height: 100%;
-    margin-left: 197px;
+    margin-left: clamp(64px, 13vw, 192px);
     @include phone {
       margin: 0;
       padding: 0;
@@ -228,6 +102,11 @@
         height: auto;
         color: #999;
         margin: 0;
+      }
+    }
+    &_final {
+      span {
+        font-weight: bold;
       }
     }
   }

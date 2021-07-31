@@ -1,5 +1,6 @@
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import { ReactComponent as Geo } from "../../icons/geomark.svg";
+import "./orderHeader.scss";
 function OrderHeader(props) {
   return (
     <div className="order_header">

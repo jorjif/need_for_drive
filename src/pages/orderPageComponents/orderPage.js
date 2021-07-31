@@ -1,6 +1,5 @@
 import NavBar from "../mainComponents/nav";
-import OrderInfo from "./orderInfo/orderInfo";
-import AdressSelect from "./orderWindows/adressSelect";
+import OrderContent from "./orderContent";
 import "../../index.scss";
 import OrderHeader from "./orderHeader/orderHeader";
 function Order() {
@@ -9,10 +8,7 @@ function Order() {
       <NavBar />
       <div className="page_order">
         <OrderHeader />
-        <div className="page_order_content">
-          <AdressSelect />
-          <OrderInfo />
-        </div>
+        <OrderContent />
       </div>
     </div>
   );

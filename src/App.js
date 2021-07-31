@@ -7,7 +7,7 @@ function App(props) {
   return (
     <Router>
       <Switch>
-        <Route path="/order" render={(props) => <Order />} />
+        <Route path="/order/" render={(props) => <Order />} />
         <Route path="/" render={(props) => <MainPage />} />
       </Switch>
     </Router>

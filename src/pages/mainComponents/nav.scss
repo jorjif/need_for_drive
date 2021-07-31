@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   z-index: 997;
+  transition: width 0.6s;
   @include tablet {
     width: 100vw;
   }
@@ -104,6 +105,7 @@
         cursor: pointer;
       }
       li {
+        transition: color 0.2s;
         @include phone {
           margin-top: 2vh;
         }
@@ -116,6 +118,7 @@
         padding: 16px;
       }
       svg {
+        transition: color 0.2s;
         margin-right: 56px;
         &:hover {
           path {

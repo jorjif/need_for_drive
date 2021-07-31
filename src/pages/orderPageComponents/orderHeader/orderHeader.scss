@@ -1,0 +1,72 @@
+@import "../../../mixins.scss";
+.order {
+  &_header {
+    /*заголовок страницы - геолокация, навбар*/
+    width: 100%;
+    &_header {
+      display: flex;
+      justify-content: space-between;
+      width: auto;
+      max-width: 1257px;
+      padding-left: 64px;
+      @include phone {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      @include ultrawide {
+        padding-left: #{"max(64px, 20vw)"};
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 35px;
+        color: #0ec261;
+        /*padding-left: #{"max(64px, 10vw)"};*/
+        font-weight: bold;
+        @include phone {
+          margin: 0;
+          margin-top: 16px;
+          margin-right: 16px;
+        }
+      }
+    }
+
+    &_nav {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 32px;
+      border: 1px solid #eeeeee;
+      border-right: 0;
+      border-left: 0;
+      @include phone {
+        flex-direction: column;
+        height: auto;
+        margin-top: 16px;
+        svg {
+          display: none;
+        }
+      }
+      &_element {
+        margin: 0;
+        padding: 0 16px;
+        color: #999999;
+        font-weight: bold;
+
+        @include phone {
+          padding: 0 8px;
+        }
+
+        &_first {
+          padding-left: 64px;
+          color: hsl(148, 87%, 41%);
+          @include phone {
+            padding-left: 16px;
+          }
+          @include ultrawide {
+            padding-left: #{"max(64px, 20vw)"};
+          }
+        }
+      }
+    }
+  }
+}
