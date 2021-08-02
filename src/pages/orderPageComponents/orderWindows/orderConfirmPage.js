@@ -6,7 +6,7 @@ import "./orderConfirm.scss";
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function OrderConfirmPage(props) {
+export default function OrderConfirmPage({ isConfirmed, confirmEvent }) {
   //стейт состояния всплывающего окна. Отвечает только за это
   const [confirmOpen, setConfirmOpen] = useState(true);
   //функция, которая меняет стейт на противоположный. Нужна для закрытия всплывающего окна
@@ -16,9 +16,9 @@ export default function OrderConfirmPage(props) {
     console.log(confirmOpen);
   }
   //функция для кнопки подтверждения. Меняет состояние заказа на выполненный, после этого закрывает окно подтверждения
-  function confirmEvent() {
+  function confirmBtnEvent() {
     handleOpen();
-    props.confirmEvent();
+    confirmEvent();
   }
 
   const popUp = classNames({
@@ -45,15 +45,15 @@ export default function OrderConfirmPage(props) {
     <div className="page_order_content">
       <ConfirmationPopup
         classes={popUp}
-        confirmEvent={confirmEvent}
+        confirmEvent={confirmBtnEvent}
         cancelEvent={handleOpen}
       />
       <OrderConfirm info={selectedCarBoilerplate} image={car2} />
       <OrderInfo
-        btnContent={props.isConfirmed ? "Отменить" : "Заказать"}
+        btnContent={isConfirmed ? "Отменить" : "Заказать"}
         order={orderBoilerplate}
         confirmation={true}
-        btnClick={props.isConfirmed ? props.confirmEvent : handleOpen}
+        btnClick={isConfirmed ? confirmEvent : handleOpen}
       />
     </div>
   );

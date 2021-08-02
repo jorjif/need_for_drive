@@ -8,7 +8,7 @@ import Arrow from "./sliderArrows.js";
 import Dots from "../dots.js";
 import "./slider.scss";
 
-function Slider(props) {
+function Slider() {
   const [index, setIndex] = useState(0);
   const [state, setState] = useState({
     Index: 0,

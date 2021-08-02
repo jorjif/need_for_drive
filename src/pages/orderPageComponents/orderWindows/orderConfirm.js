@@ -1,20 +1,23 @@
-export default function OrderConfirm(props) {
+export default function OrderConfirm({
+  info: { model, number, fuel, time },
+  image,
+}) {
   return (
     <div className="order_confirm">
       <div className="order_confirm_info">
-        <h1 className="order_confirm_info_car">{props.info.model}</h1>
-        <p className="order_confirm_info_plate">{props.info.number}</p>
+        <h1 className="order_confirm_info_car">{model}</h1>
+        <p className="order_confirm_info_plate">{number}</p>
         <p className="order_confirm_info_additional">
           <span>Топливо </span>
-          {props.info.fuel}%
+          {fuel}%
         </p>
         <p className="order_confirm_info_additional">
           <span>Доступна с </span>
-          {props.info.time}
+          {time}
         </p>
       </div>
       <div className="order_confirm_car">
-        <img src={props.image} alt="Фото машины" />
+        <img src={image} alt="Фото машины" />
       </div>
     </div>
   );

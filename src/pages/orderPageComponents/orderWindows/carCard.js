@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function CarCard(props) {
+export default function CarCard({ name, price, image }) {
   const [focused, changeFocus] = useState(false);
   const cardState = classNames({
     order_card: true,
@@ -9,9 +9,9 @@ export default function CarCard(props) {
   });
   return (
     <div className={cardState} onClick={() => changeFocus(!focused)}>
-      <h1 className="order_card_name">{props.name}</h1>
-      <p className="order_card_price">{props.price}</p>
-      <img src={props.image} alt="Фото машины" className="order_card_image" />
+      <h1 className="order_card_name">{name}</h1>
+      <p className="order_card_price">{price}</p>
+      <img src={image} alt="Фото машины" className="order_card_image" />
     </div>
   );
 }

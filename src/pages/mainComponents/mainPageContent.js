@@ -2,7 +2,7 @@ import { ReactComponent as Geo } from "../icons/geomark.svg";
 import Button from "./standartButton.js";
 import "./mainPage.scss";
 import { Link } from "react-router-dom";
-function MainPageContent(props) {
+function MainPageContent() {
   return (
     <div className="main-page">
       <header className="main-page_header">

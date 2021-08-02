@@ -2,7 +2,7 @@ import { ReactComponent as Delete } from "../../icons/deleteCross.svg";
 import { ReactComponent as CheckboxMark } from "../../icons/checkboxMark.svg";
 import DateTimePicker from "react-datetime-picker";
 import { useState } from "react";
-export default function Options(props) {
+export default function Options() {
   const [dateFrom, setDateFrom] = useState(new Date());
 
   const [dateTo, setDateTo] = useState(new Date());

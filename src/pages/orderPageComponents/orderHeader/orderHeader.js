@@ -1,9 +1,9 @@
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import { ReactComponent as Geo } from "../../icons/geomark.svg";
 import "./orderHeader.scss";
-function OrderHeader(props) {
+function OrderHeader({ isConfirmed }) {
   function orderConfirmed() {
-    if (props.isConfirmed) {
+    if (isConfirmed) {
       return (
         <nav className="order_header_nav">
           <p className="order_header_nav_element_first_order-number">

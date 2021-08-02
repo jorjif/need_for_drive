@@ -2,7 +2,7 @@ import OrderInfo from "../orderInfo/orderInfo";
 import CarSelect from "./carSelect";
 import "./carSelect.scss";
 
-function CarsPage(props) {
+function CarsPage() {
   const order = {
     "Пункт выдачи": "Ульяновск, Нариманова\u00A042",
     Модель: "Hyundai,\u00A0i30N",

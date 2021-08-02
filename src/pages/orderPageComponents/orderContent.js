@@ -3,16 +3,13 @@ import AdressPage from "./orderWindows/adressPage";
 import CarsPage from "./orderWindows/carSelectPage";
 import OptionsPage from "./orderWindows/optionsPage";
 import OrderConfirmPage from "./orderWindows/orderConfirmPage";
-function OrderContent(props) {
+function OrderContent({ isConfirmed, confirmEvent }) {
   return (
     <Switch>
       <Route
         path="/order/confirm"
         render={() => (
-          <OrderConfirmPage
-            confirmEvent={props.confirmEvent}
-            isConfirmed={props.isConfirmed}
-          />
+          <OrderConfirmPage confirmEvent={confirmEvent} isConfirmed={isConfirmed} />
         )}
       />
       <Route path="/order/options/" render={() => <OptionsPage />} />

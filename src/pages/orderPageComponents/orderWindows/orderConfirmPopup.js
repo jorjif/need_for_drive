@@ -1,7 +1,7 @@
 import Button from "../../mainComponents/standartButton";
-export default function ConfirmationPopup(props) {
+export default function ConfirmationPopup({ classes, confirmEvent, cancelEvent }) {
   return (
-    <div className={props.classes}>
+    <div className={classes}>
       <div className="order_confirm_popup_content">
         <h1>Подтвердить заказ</h1>
         <div className="order_confirm_popup_buttons">
@@ -9,13 +9,13 @@ export default function ConfirmationPopup(props) {
             classes="order_confirm_popup_accept"
             msg="Подтвердить"
             pressed="order_confirm_popup_accept_pressed"
-            onClick={props.confirmEvent}
+            onClick={confirmEvent}
           />
           <Button
             classes="order_confirm_popup_cancel"
             pressed="order_confirm_popup_cancel_pressed"
             msg="Вернуться"
-            onClick={props.cancelEvent}
+            onClick={cancelEvent}
           />
         </div>
       </div>
