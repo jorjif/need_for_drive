@@ -1,5 +1,5 @@
 import AdressSelect from "./adressSelect";
-import OrderInfo from "../orderInfo/orderInfo";
+import OrderInfo from "../../orderInfo/orderInfo";
 import "./adressPage.scss";
 
 function AdressPage() {

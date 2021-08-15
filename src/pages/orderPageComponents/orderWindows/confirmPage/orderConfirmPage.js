@@ -1,7 +1,7 @@
-import OrderInfo from "../orderInfo/orderInfo";
+import OrderInfo from "../../orderInfo/orderInfo";
 import OrderConfirm from "./orderConfirm";
 import ConfirmationPopup from "./orderConfirmPopup";
-import car2 from "./images/2.png";
+import car2 from "../images/2.png";
 import "./orderConfirm.scss";
 import { useState } from "react";
 import classNames from "classnames";

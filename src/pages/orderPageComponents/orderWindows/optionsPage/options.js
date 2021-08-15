@@ -1,5 +1,5 @@
-import { ReactComponent as Delete } from "../../icons/deleteCross.svg";
-import { ReactComponent as CheckboxMark } from "../../icons/checkboxMark.svg";
+import { ReactComponent as Delete } from "../../../icons/deleteCross.svg";
+import { ReactComponent as CheckboxMark } from "../../../icons/checkboxMark.svg";
 import DateTimePicker from "react-datetime-picker";
 import { useState } from "react";
 export default function Options() {
@@ -84,6 +84,7 @@ export default function Options() {
                   type="datetime-local"
                   list="order_date_from"
                   className="order_options_date_form_input_textfield"
+                  format="dd.MM.y hh:mm"
                   clearIcon={<Delete />}
                 />
               </div>

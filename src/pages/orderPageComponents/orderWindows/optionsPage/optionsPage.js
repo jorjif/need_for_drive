@@ -1,5 +1,5 @@
 import Options from "./options";
-import OrderInfo from "../orderInfo/orderInfo";
+import OrderInfo from "../../orderInfo/orderInfo";
 import "./optionsPage.scss";
 
 export default function OptionsPage(props) {
@@ -11,6 +11,7 @@ export default function OptionsPage(props) {
     Тариф: "На\u00A0сутки",
     "Полный бак": "Да",
   };
+
   return (
     <div className="page_order_content">
       <Options />

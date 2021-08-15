@@ -1,7 +1,7 @@
-import car1 from "./images/1.png";
-import car2 from "./images/2.png";
-import car3 from "./images/3.png";
-import car4 from "./images/4.png";
+import car1 from "../images/1.png";
+import car2 from "../images/2.png";
+import car3 from "../images/3.png";
+import car4 from "../images/4.png";
 import CarCard from "./carCard";
 function CarSelect() {
   //массив с объектами машинами

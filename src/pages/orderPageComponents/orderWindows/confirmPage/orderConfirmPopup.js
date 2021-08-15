@@ -1,4 +1,4 @@
-import Button from "../../mainComponents/standartButton";
+import Button from "../../../mainComponents/standartButton";
 export default function ConfirmationPopup({ classes, confirmEvent, cancelEvent }) {
   return (
     <div className={classes}>

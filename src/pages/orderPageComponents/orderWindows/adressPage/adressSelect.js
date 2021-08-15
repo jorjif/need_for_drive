@@ -1,5 +1,5 @@
-import { ReactComponent as Delete } from "../../icons/deleteCross.svg";
-import Map from "../../icons/orderMap.png";
+import { ReactComponent as Delete } from "../../../icons/deleteCross.svg";
+import Map from "../../../icons/orderMap.png";
 function AdressSelect() {
   return (
     <div className="order_adress">

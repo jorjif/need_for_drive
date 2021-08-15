@@ -1,4 +1,4 @@
-import OrderInfo from "../orderInfo/orderInfo";
+import OrderInfo from "../../orderInfo/orderInfo";
 import CarSelect from "./carSelect";
 import "./carSelect.scss";
 
