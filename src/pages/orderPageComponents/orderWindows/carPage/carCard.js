@@ -1,11 +1,10 @@
 import { useState } from "react";
 import classNames from "classnames";
 
-export default function CarCard({ name, price, image, onClick }) {
-  const [focused, changeFocus] = useState(false);
+export default function CarCard({ name, price, image, onClick, selected }) {
   const cardState = classNames({
     order_card: true,
-    order_card_focused: focused,
+    order_card_focused: selected,
   });
   return (
     <div className={cardState} onClick={onClick}>
