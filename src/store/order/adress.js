@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   city: "",
   street: "",
-  status: "in progress",
+  status: "complete",
 };
 const adressSlice = createSlice({
   name: "adress",

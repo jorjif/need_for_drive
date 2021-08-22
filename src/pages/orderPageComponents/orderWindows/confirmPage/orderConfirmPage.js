@@ -5,26 +5,18 @@ import car2 from "../images/2.png";
 import "./orderConfirm.scss";
 import { useState } from "react";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { confirmOrder, popupCloseOpen } from "../../../../store/order/confirmation";
 
-export default function OrderConfirmPage({ isConfirmed, confirmEvent }) {
-  //стейт состояния всплывающего окна. Отвечает только за это
-  const [confirmOpen, setConfirmOpen] = useState(true);
-  //функция, которая меняет стейт на противоположный. Нужна для закрытия всплывающего окна
-  //возможности менять стейт снизу
+export default function OrderConfirmPage() {
+  const { orderConfirmed } = useSelector((store) => store.status);
+  const dispatch = useDispatch();
+  function confirmEvent() {
+    dispatch(confirmOrder(false));
+  }
   function handleOpen() {
-    setConfirmOpen((state) => !state);
-    console.log(confirmOpen);
+    dispatch(popupCloseOpen(true));
   }
-  //функция для кнопки подтверждения. Меняет состояние заказа на выполненный, после этого закрывает окно подтверждения
-  function confirmBtnEvent() {
-    handleOpen();
-    confirmEvent();
-  }
-
-  const popUp = classNames({
-    order_confirm_closedPopup: confirmOpen,
-    order_confirm_popup: true,
-  });
   //макет с информацией о заказе
   const orderBoilerplate = {
     "Пункт выдачи": "Ульяновск, Нариманова\u00A042",
@@ -43,17 +35,13 @@ export default function OrderConfirmPage({ isConfirmed, confirmEvent }) {
   };
   return (
     <div className="page_order_content">
-      <ConfirmationPopup
-        classes={popUp}
-        confirmEvent={confirmBtnEvent}
-        cancelEvent={handleOpen}
-      />
+      <ConfirmationPopup />
       <OrderConfirm info={selectedCarBoilerplate} image={car2} />
       <OrderInfo
-        btnContent={isConfirmed ? "Отменить" : "Заказать"}
+        btnContent={orderConfirmed ? "Отменить" : "Заказать"}
         order={orderBoilerplate}
         confirmation={true}
-        btnClick={isConfirmed ? confirmEvent : handleOpen}
+        btnClick={orderConfirmed ? confirmEvent : handleOpen}
       />
     </div>
   );

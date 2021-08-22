@@ -3,12 +3,14 @@ import { ReactComponent as Geo } from "../../icons/geomark.svg";
 import "./orderHeader.scss";
 import { useSelector } from "react-redux";
 import classNames from "classnames";
+import { Link } from "react-router-dom";
 
-function OrderHeader({ isConfirmed }) {
+function OrderHeader() {
   const adressStatus = useSelector((store) => store.adress.status);
   const carSelectStatus = useSelector((store) => store.car.status);
   const optionsStatus = useSelector((store) => store.options.status);
   const confirmationStatus = useSelector((store) => store.status.status);
+  const isConfirmed = useSelector((store) => store.status.orderConfirmed);
   function classForMenu(status) {
     return classNames({
       order_header_nav_element: true,
@@ -17,6 +19,7 @@ function OrderHeader({ isConfirmed }) {
       order_header_nav_element_blocked: status === "blocked",
     });
   }
+
   function orderConfirmed() {
     if (isConfirmed) {
       return (
@@ -27,15 +30,29 @@ function OrderHeader({ isConfirmed }) {
         </nav>
       );
     }
+    function isDisabled(e, status) {
+      if (status === "blocked") {
+        e.preventDefault();
+      }
+    }
+
     return (
       <nav className="order_header_nav">
-        <p className={classForMenu(adressStatus)}>Местоположение</p>
+        <Link to="/order/adress" onClick={(e) => isDisabled(e, adressStatus)}>
+          <p className={classForMenu(adressStatus)}>Местоположение</p>
+        </Link>
         <Arrow />
-        <p className={classForMenu(carSelectStatus)}>Модель</p>
+        <Link to="/order/cars" onClick={(e) => isDisabled(e, carSelectStatus)}>
+          <p className={classForMenu(carSelectStatus)}>Модель</p>
+        </Link>
         <Arrow />
-        <p className={classForMenu(optionsStatus)}>Дополнительно</p>
+        <Link to="/order/options" onClick={(e) => isDisabled(e, optionsStatus)}>
+          <p className={classForMenu(optionsStatus)}>Дополнительно</p>
+        </Link>
         <Arrow />
-        <p className={classForMenu(confirmationStatus)}>Итоги</p>
+        <Link to="/order/confirm" onClick={(e) => isDisabled(e, confirmationStatus)}>
+          <p className={classForMenu(confirmationStatus)}>Итоги</p>
+        </Link>
       </nav>
     );
   }

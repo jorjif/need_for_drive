@@ -49,28 +49,26 @@
           display: none;
         }
       }
+      a:first-child {
+        @include orderPadding();
+        @include phone {
+          padding-left: 16px;
+        }
+        p {
+          padding-left: 0;
+        }
+      }
       &_element {
         margin: 0;
         padding: 0 16px;
-
         font-weight: bold;
-
         @include phone {
           padding: 0 8px;
         }
-
-        &:nth-child(1) {
-          @include phone {
-            padding-left: 16px;
-          }
-
+        &_first_order-number {
+          color: #121212;
+          font-weight: bold;
           @include orderPadding();
-          &_order-number {
-            color: #121212;
-            font-weight: bold;
-
-            @include orderPadding();
-          }
         }
         &_isActive {
           color: hsl(148, 87%, 41%);

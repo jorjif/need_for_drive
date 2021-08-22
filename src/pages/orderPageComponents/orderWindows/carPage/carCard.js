@@ -1,4 +1,3 @@
-import { useState } from "react";
 import classNames from "classnames";
 
 export default function CarCard({ name, price, image, onClick, selected }) {

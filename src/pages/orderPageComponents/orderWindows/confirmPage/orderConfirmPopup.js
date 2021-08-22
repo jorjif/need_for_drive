@@ -1,5 +1,21 @@
+import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
+import { confirmOrder, popupCloseOpen } from "../../../../store/order/confirmation";
 import Button from "../../../mainComponents/standartButton";
-export default function ConfirmationPopup({ classes, confirmEvent, cancelEvent }) {
+export default function ConfirmationPopup() {
+  const dispatch = useDispatch();
+  const { popupOpen } = useSelector((store) => store.status);
+  function confirmEvent() {
+    dispatch(popupCloseOpen(false));
+    dispatch(confirmOrder(true));
+  }
+  function cancelEvent() {
+    dispatch(popupCloseOpen(false));
+  }
+  const classes = classNames({
+    order_confirm_closedPopup: !popupOpen,
+    order_confirm_popup: true,
+  });
   return (
     <div className={classes}>
       <div className="order_confirm_popup_content">

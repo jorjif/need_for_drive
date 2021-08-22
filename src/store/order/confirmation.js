@@ -10,13 +10,19 @@ const confirmationSlice = createSlice({
   name: "confirmation",
   initialState,
   reducers: {
-    popupCloseOpen({ popupOpen }) {
-      popupOpen = !popupOpen;
+    changeStatus(store, action) {
+      store.status = action.payload;
     },
-    confirmOrder({ orderConfirmed }) {
-      orderConfirmed = !orderConfirmed;
+
+    popupCloseOpen(store, action) {
+      store.popupOpen = action.payload;
+    },
+
+    confirmOrder(store, action) {
+      store.orderConfirmed = action.payload;
     },
   },
 });
-export const { popupCloseOpen, confirmOrder } = confirmationSlice.actions;
+export const { popupCloseOpen, confirmOrder, changeStatus } =
+  confirmationSlice.actions;
 export default confirmationSlice.reducer;
