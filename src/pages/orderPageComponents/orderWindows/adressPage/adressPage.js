@@ -7,7 +7,12 @@ function AdressPage() {
   return (
     <div className="page_order_content">
       <AdressSelect />
-      <OrderInfo link="/order/cars" btnContent="Выбрать модель" order={adress} />
+      <OrderInfo
+        link="/order/cars"
+        form="adress_form"
+        btnContent="Выбрать модель"
+        order={adress}
+      />
     </div>
   );
 }

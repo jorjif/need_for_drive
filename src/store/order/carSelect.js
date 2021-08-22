@@ -2,27 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   carModel: "",
-  carPrice: {
-    startPrice: 10000,
-    endPrice: 32000,
-  },
+  priceRange: "",
   carImg: "",
+  id: "",
+  status: "blocked",
 };
 const carSelect = createSlice({
   name: "carSelect",
   initialState,
   reducers: {
-    selectCar(state, { payload }) {
-      state = {
-        carModel: payload.carModel,
-        carPrice: {
-          startPrice: payload.startPrice,
-          endPrice: payload.endPrice,
-        },
-        carImg: payload.carImg,
+    selectCar(state, action) {
+      const { carImg, carModel, id, priceRange } = action.payload;
+      console.table(action.payload);
+      return {
+        carModel,
+        priceRange,
+        carImg,
+        id,
+        status: state.status,
       };
+    },
+    changeStatus(state, action) {
+      state.status = action.payload;
     },
   },
 });
-export const { selectCar } = carSelect.actions;
+export const { selectCar, changeStatus } = carSelect.actions;
 export default carSelect.reducer;

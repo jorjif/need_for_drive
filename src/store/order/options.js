@@ -10,6 +10,7 @@ const initialState = {
     "Длительность аренды": "",
   },
   Тариф: "Поминутно",
+  status: "blocked",
 };
 const optionsSlice = createSlice({
   name: "options",
@@ -21,7 +22,10 @@ const optionsSlice = createSlice({
     setEndDate({ date }, action) {
       date.to = action.payload.toDateString();
     },
+    changeStatus(state, action) {
+      state.status = action.payload;
+    },
   },
 });
-export const { setStartDate, setEndDate } = optionsSlice.actions;
+export const { setStartDate, setEndDate, changeStatus } = optionsSlice.actions;
 export default optionsSlice.reducer;

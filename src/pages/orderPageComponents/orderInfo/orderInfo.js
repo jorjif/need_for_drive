@@ -2,9 +2,19 @@ import Button from "../../mainComponents/standartButton";
 import OrderOptions from "./priceList";
 import "./orderInfo.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function OrderInfo({ order, btnContent, btnClick, confirmation, link }) {
+function OrderInfo({ order, btnContent, btnClick, confirmation, link, form }) {
   const orderArr = []; //массив с OrderOptions - деталями заказа, который составляет пользователь
+  const accessToNext = useSelector((store) => store.access.access);
+
+  function allowNextStep(e) {
+    if (!accessToNext) {
+      //если форма заполнена некорректно - пользователь не допускается до следующей вкладки
+      e.preventDefault();
+      return;
+    }
+  }
   for (const [key, value] of Object.entries(order)) {
     //цикл через объект содержащий детали заказа
     orderArr.push(<OrderOptions key={key} optionName={key} optionValue={value} />);
@@ -27,12 +37,13 @@ function OrderInfo({ order, btnContent, btnClick, confirmation, link }) {
           pressed={pressedClass}
           msg={btnContent}
           onClick={btnClick}
+          form={form}
         />
       );
     }
     //во всех остальных случаях, пропса нет, рендерится линк
     return (
-      <Link to={link}>
+      <Link to={link} onClick={allowNextStep}>
         <Button
           classes="order_price_next"
           pressed="order_price_next_pressed"

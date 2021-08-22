@@ -1,7 +1,22 @@
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import { ReactComponent as Geo } from "../../icons/geomark.svg";
 import "./orderHeader.scss";
+import { useSelector } from "react-redux";
+import classNames from "classnames";
+
 function OrderHeader({ isConfirmed }) {
+  const adressStatus = useSelector((store) => store.adress.status);
+  const carSelectStatus = useSelector((store) => store.car.status);
+  const optionsStatus = useSelector((store) => store.options.status);
+  const confirmationStatus = useSelector((store) => store.status.status);
+  function classForMenu(status) {
+    return classNames({
+      order_header_nav_element: true,
+      order_header_nav_element_isActive: status === "in progress",
+      order_header_nav_element_complete: status === "complete",
+      order_header_nav_element_blocked: status === "blocked",
+    });
+  }
   function orderConfirmed() {
     if (isConfirmed) {
       return (
@@ -14,18 +29,17 @@ function OrderHeader({ isConfirmed }) {
     }
     return (
       <nav className="order_header_nav">
-        <p className="order_header_nav_element order_header_nav_element_first">
-          Местоположение
-        </p>
+        <p className={classForMenu(adressStatus)}>Местоположение</p>
         <Arrow />
-        <p className="order_header_nav_element">Модель</p>
+        <p className={classForMenu(carSelectStatus)}>Модель</p>
         <Arrow />
-        <p className="order_header_nav_element">Дополнительно</p>
+        <p className={classForMenu(optionsStatus)}>Дополнительно</p>
         <Arrow />
-        <p className="order_header_nav_element">Итоги</p>
+        <p className={classForMenu(confirmationStatus)}>Итоги</p>
       </nav>
     );
   }
+
   return (
     <div className="order_header">
       <header className="order_header_header">

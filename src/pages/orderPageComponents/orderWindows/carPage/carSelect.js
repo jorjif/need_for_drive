@@ -3,7 +3,17 @@ import car2 from "../images/2.png";
 import car3 from "../images/3.png";
 import car4 from "../images/4.png";
 import CarCard from "./carCard";
+import { selectCar, changeStatus } from "../../../../store/order/carSelect";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
 function CarSelect() {
+  const dispatch = useDispatch();
+  //const { carModel, priceRange, carImg } = useSelector((store) => store.car);
+  useEffect(() => {
+    dispatch(changeStatus("in progress"));
+    return () => dispatch(changeStatus("complete"));
+  }, []);
   //массив с объектами машинами
   const cars = [
     {
@@ -16,6 +26,16 @@ function CarSelect() {
     { header: "CRETA", price: "12 000 - 25 000", img: car3, id: "car11532" },
     { header: "SONATA", price: "10 000 - 32 000", img: car4, id: "car12735" },
   ];
+  function setCarOnclick({ header, price, img, id }) {
+    const carObject = {
+      carModel: header,
+      carImg: img,
+      id,
+      priceRange: price,
+    };
+    console.table(carObject);
+    dispatch(selectCar(carObject));
+  }
   return (
     <div className="order_cars">
       <form className="order_cars_form ">
@@ -64,6 +84,7 @@ function CarSelect() {
         {cars.map((car) => {
           return (
             <CarCard
+              onClick={() => setCarOnclick(car)}
               key={car.id}
               name={car.header}
               price={car.price}

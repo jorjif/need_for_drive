@@ -2,18 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   city: "",
   street: "",
+  status: "in progress",
 };
 const adressSlice = createSlice({
   name: "adress",
   initialState,
   reducers: {
-    cityChanged({ city }, { payload }) {
-      city = payload;
+    changeStatus(state, action) {
+      state.status = action.payload;
     },
-    streetChanged({ street }, { payload }) {
-      street = payload;
+
+    cityChanged(state, action) {
+      state.city = action.payload;
+    },
+
+    streetChanged(state, action) {
+      state.street = action.payload;
     },
   },
 });
-export const { cityChanged, streetChanged } = adressSlice.actions;
+export const {
+  cityChanged,
+  streetChanged,
+  changeStatus,
+  confirmCity,
+  confirmStreet,
+} = adressSlice.actions;
 export default adressSlice.reducer;

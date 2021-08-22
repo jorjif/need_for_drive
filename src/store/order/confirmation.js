@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   popupOpen: false,
   orderConfirmed: false,
+  status: "blocked",
 };
 
 const confirmationSlice = createSlice({
