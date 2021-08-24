@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   city: "",
   street: "",
-  status: "complete",
+  streetNoSpace: "",
+  status: "blocked",
 };
 const adressSlice = createSlice({
   name: "adress",
@@ -18,6 +19,8 @@ const adressSlice = createSlice({
 
     streetChanged(state, action) {
       state.street = action.payload;
+      const streetNoSpace = action.payload.replace(" ", "\u00A0");
+      state.streetNoSpace = streetNoSpace;
     },
   },
 });

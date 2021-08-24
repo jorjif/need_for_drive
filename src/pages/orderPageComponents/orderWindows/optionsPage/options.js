@@ -11,7 +11,6 @@ import {
   changeDateDifference,
   changeTariff,
   addOption,
-  removeOption,
 } from "../../../../store/order/options";
 import { format } from "date-fns/fp";
 import { userAccess } from "../../../../store/order/orderAcess";
@@ -25,7 +24,7 @@ export default function Options() {
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
-    return () => dispatch(changeStatus("done"));
+    return () => dispatch(changeStatus("complete"));
     // eslint-disable-next-line
   }, []);
 

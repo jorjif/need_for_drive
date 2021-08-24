@@ -4,7 +4,7 @@ function dateDifference(dateFrom, dateTo) {
   const hours = Math.floor(difference / msInHour);
   const days = Math.floor(hours / 24);
   const hoursWithDays = Math.floor(hours % 24);
-  return `${days}д ${hoursWithDays}ч`;
+  return `${days}д\u00A0${hoursWithDays}ч`;
 }
 
 export default dateDifference;

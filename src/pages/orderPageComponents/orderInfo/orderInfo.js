@@ -3,10 +3,64 @@ import OrderOptions from "./priceList";
 import "./orderInfo.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-function OrderInfo({ order, btnContent, btnClick, confirmation, link, form }) {
-  const orderArr = []; //массив с OrderOptions - деталями заказа, который составляет пользователь
+function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
+  const [orderList, setOrderList] = useState([]); //массив с OrderOptions - деталями заказа, который составляет пользователь
   const accessToNext = useSelector((store) => store.access.access);
+  const adressInfo = useSelector((store) => store.adress);
+  const carInfo = useSelector((store) => store.car);
+  const optionsInfo = useSelector((store) => store.options);
+
+  useEffect(() => {
+    const orderInfoArr = [adressInfo, carInfo, optionsInfo];
+    const completedSteps = orderInfoArr.filter((step) => step.status === "complete");
+    let order = {};
+
+    completedSteps.forEach((info, index) => {
+      switch (index) {
+        case 0:
+          order = {
+            ...order,
+            "Пункт выдачи": `${info.city}, ${info.streetNoSpace}`,
+          };
+          break;
+        case 1:
+          order = {
+            ...order,
+            Модель: info.carModel,
+          };
+          break;
+        case 2:
+          const options = Object.keys(info.options);
+          const optionsObj = options.reduce((accum, option) => {
+            return { ...accum, [option]: "Да" };
+          }, {});
+          order = {
+            ...order,
+            Цвет: info.color,
+            "Длительность аренды": info.date.difference,
+            Тариф: info.tariff,
+            ...optionsObj,
+          };
+          console.table(order);
+          break;
+        default:
+          break;
+      }
+    });
+    let orderArr = [];
+
+    for (const [key, value] of Object.entries(order)) {
+      //цикл через объект содержащий детали заказа
+      const orderOption = (
+        <OrderOptions key={key} optionName={key} optionValue={value} />
+      );
+      orderArr.push(orderOption);
+    }
+    console.log(orderArr);
+    setOrderList([...orderArr]);
+  }, [adressInfo, carInfo, optionsInfo]);
 
   function allowNextStep(e) {
     if (!accessToNext) {
@@ -15,10 +69,7 @@ function OrderInfo({ order, btnContent, btnClick, confirmation, link, form }) {
       return;
     }
   }
-  for (const [key, value] of Object.entries(order)) {
-    //цикл через объект содержащий детали заказа
-    orderArr.push(<OrderOptions key={key} optionName={key} optionValue={value} />);
-  }
+
   //функция отвечает за рендер кнопки - будет ли это link или обычная кнопка
   const buttonType = () => {
     if (confirmation === true) {
@@ -56,7 +107,7 @@ function OrderInfo({ order, btnContent, btnClick, confirmation, link, form }) {
     <div className="order_price">
       <h1>Ваш заказ:</h1>
       <div className="order_price_prices">
-        <ul>{orderArr}</ul>
+        <ul>{orderList}</ul>
       </div>
       <div className="order_price_final">
         <p>

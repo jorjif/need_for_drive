@@ -7,7 +7,7 @@ const initialState = {
   date: {
     from: dateFrom,
     to: dateTo,
-    "Длительность аренды": "",
+    difference: "",
   },
   tariff: "Поминутно",
   options: {},
@@ -44,7 +44,7 @@ const optionsSlice = createSlice({
     },
 
     changeDateDifference(store, action) {
-      store.date["Длительность аренды"] = action.payload;
+      store.date.difference = action.payload;
     },
 
     changeTariff(store, action) {

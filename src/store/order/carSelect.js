@@ -13,7 +13,6 @@ const carSelect = createSlice({
   reducers: {
     selectCar(state, action) {
       const { carImg, carModel, id, priceRange } = action.payload;
-      console.table(action.payload);
       return {
         carModel,
         priceRange,
