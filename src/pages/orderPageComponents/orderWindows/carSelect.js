@@ -4,14 +4,18 @@ import car3 from "./images/3.png";
 import car4 from "./images/4.png";
 import CarCard from "./carCard";
 function CarSelect(props) {
-  const headers = ["ELANTRA", "i30N", "CRETA", "SONATA"];
-  const prices = [
-    "15 000 - 25 000",
-    "10 000 - 32 000",
-    "12 000 - 25 000",
-    "10 000 - 32 000",
+  //массив с объектами машинами
+  const cars = [
+    {
+      header: "ELANTRA",
+      price: "15 000 - 25 000",
+      img: car1,
+      id: "car14223",
+    },
+    { header: "i30 N", price: "10 000 - 32 000", img: car2, id: "car12635" },
+    { header: "CRETA", price: "12 000 - 25 000", img: car3, id: "car11532" },
+    { header: "SONATA", price: "10 000 - 32 000", img: car4, id: "car12735" },
   ];
-  const img = [car1, car2, car3, car4];
   return (
     <div className="order_cars">
       <form className="order_cars_form ">
@@ -57,8 +61,15 @@ function CarSelect(props) {
         </div>
       </form>
       <div className="order_cars_list">
-        {headers.map((header, i) => {
-          return <CarCard key={i} name={header} price={prices[i]} image={img[i]} />;
+        {cars.map((car) => {
+          return (
+            <CarCard
+              key={car.id}
+              name={car.header}
+              price={car.price}
+              image={car.img}
+            />
+          );
         })}
       </div>
     </div>

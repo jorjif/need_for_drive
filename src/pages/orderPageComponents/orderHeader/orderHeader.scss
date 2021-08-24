@@ -8,14 +8,17 @@
       justify-content: space-between;
       width: auto;
       max-width: 1257px;
-      padding-left: 64px;
+      p {
+        margin-right: 32px;
+        @include phone {
+          margin-right: 10px;
+        }
+      }
       @include phone {
         flex-direction: column;
         align-items: flex-end;
       }
-      @include ultrawide {
-        padding-left: #{"max(64px, 20vw)"};
-      }
+      @include orderPadding();
       h1 {
         font-size: 30px;
         line-height: 35px;
@@ -57,13 +60,16 @@
         }
 
         &_first {
-          padding-left: 64px;
           color: hsl(148, 87%, 41%);
           @include phone {
             padding-left: 16px;
           }
-          @include ultrawide {
-            padding-left: #{"max(64px, 20vw)"};
+          @include orderPadding();
+          &_order-number {
+            color: #121212;
+            font-weight: bold;
+
+            @include orderPadding();
           }
         }
       }

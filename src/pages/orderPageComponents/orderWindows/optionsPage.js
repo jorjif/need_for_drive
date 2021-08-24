@@ -14,7 +14,7 @@ export default function OptionsPage(props) {
   return (
     <div className="page_order_content">
       <Options />
-      <OrderInfo btnContent="Итого" order={orderBoilerplate} link="/order/" />
+      <OrderInfo btnContent="Итого" order={orderBoilerplate} link="/order/confirm" />
     </div>
   );
 }

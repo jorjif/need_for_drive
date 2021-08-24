@@ -15,3 +15,12 @@
     @content;
   }
 }
+@mixin orderPadding {
+  padding-left: 64px;
+  @include tablet {
+    padding-left: 16px;
+  }
+  @include ultrawide {
+    padding-left: #{"max(64px, 20vw)"};
+  }
+}
