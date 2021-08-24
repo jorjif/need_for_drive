@@ -13,12 +13,15 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
   const optionsInfo = useSelector((store) => store.options);
 
   useEffect(() => {
+    //создает массив из частей стора с данными
     const orderInfoArr = [adressInfo, carInfo, optionsInfo];
+    //фильтрует массив оставляя только выполненные
     const completedSteps = orderInfoArr.filter((step) => step.status === "complete");
+    //объект с заказом через который затем будет итерироваться цикл
     let order = {};
-
     completedSteps.forEach((info, index) => {
       switch (index) {
+        //итерация по шагам заказа
         case 0:
           order = {
             ...order,
@@ -32,7 +35,9 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
           };
           break;
         case 2:
+          //опции - объект внутри массива
           const options = Object.keys(info.options);
+          //модифицируем объект так, чтоб каждый ключ имел значение да
           const optionsObj = options.reduce((accum, option) => {
             return { ...accum, [option]: "Да" };
           }, {});
@@ -49,6 +54,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
           break;
       }
     });
+
     let orderArr = [];
 
     for (const [key, value] of Object.entries(order)) {
@@ -58,7 +64,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
       );
       orderArr.push(orderOption);
     }
-    console.log(orderArr);
+
     setOrderList([...orderArr]);
   }, [adressInfo, carInfo, optionsInfo]);
 
