@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { changeStatus } from "../../../../store/order/confirmation";
-export default function OrderConfirm({ info: { number, fuel } }) {
+export default function OrderConfirm() {
   const { carModel, carImg } = useSelector((store) => store.car);
   const { from } = useSelector((store) => store.options.date);
   const dispatch = useDispatch();
@@ -9,6 +9,9 @@ export default function OrderConfirm({ info: { number, fuel } }) {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
   }, []);
+  //заглушки, потом будет взято с сервера
+  const fuel = "4%";
+  const number = "У127ЕК123";
   return (
     <div className="order_confirm">
       <div className="order_confirm_info">

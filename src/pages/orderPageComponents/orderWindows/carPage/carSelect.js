@@ -7,13 +7,24 @@ import { selectCar, changeStatus } from "../../../../store/order/carSelect";
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { fetchCar } from "./fetchCar";
 
 function CarSelect() {
   const dispatch = useDispatch();
   const { id } = useSelector((store) => store.car);
+
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    function errorHandler(err) {
+      console.error(err);
+    }
+    fetchCar(errorHandler);
+    // eslint-disable-next-line
   }, []);
   //массив с объектами машинами
   const cars = [
@@ -41,7 +52,7 @@ function CarSelect() {
   return (
     <div className="order_cars">
       <form className="order_cars_form ">
-        <div className="order_cars_input radio_container">
+        <label className="order_cars_input radio_container">
           <input
             type="radio"
             name="class"
@@ -54,8 +65,8 @@ function CarSelect() {
             Все модели
           </label>
           <span className="radio_checkmark"></span>
-        </div>
-        <div className="order_cars_input radio_container">
+        </label>
+        <label className="order_cars_input radio_container">
           <input
             type="radio"
             name="class"
@@ -67,8 +78,8 @@ function CarSelect() {
             Эконом
           </label>
           <span className="radio_checkmark"></span>
-        </div>
-        <div className="order_cars_input radio_container">
+        </label>
+        <label className="order_cars_input radio_container">
           <input
             type="radio"
             name="class"
@@ -80,7 +91,7 @@ function CarSelect() {
             Премиум
           </label>
           <span className="radio_checkmark"></span>
-        </div>
+        </label>
       </form>
       <div className="order_cars_list">
         {cars.map((car) => {

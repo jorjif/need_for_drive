@@ -48,7 +48,6 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
             Тариф: info.tariff,
             ...optionsObj,
           };
-          console.table(order);
           break;
         default:
           break;
