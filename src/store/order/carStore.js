@@ -1,23 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const initialState = {
-  carList: [],
-  error: "",
-};
-//я забыл про то что редукс не асинхронен, код ниже  не имеет смысла (но пусть пока побудет тут)
-const carStore = createSlice({
-  name: "carStore",
-  initialState,
-  reducers: {
-    setCarStore(store, action) {
-      store.carList = action.payload;
-    },
-
-    setError(store, action) {
-      store.error = action.payload;
-    },
-  },
+export const databaseApi = createApi({
+  reducerPath: "carList",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://api-factory.simbirsoft1.com/api/",
+  }),
+  endpoints: (builders) => ({
+    getCars: builders.query({
+      query: () => {
+        return {
+          url: "db/car",
+          method: "GET",
+          headers: {
+            "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+            Authorization: "Bearer 4cbcea96de",
+          },
+        };
+      },
+    }),
+  }),
 });
 
-export const { setCarStore, setError } = carStore.actions;
-export default carStore;
+export const { useGetCarsQuery } = databaseApi;

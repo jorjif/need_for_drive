@@ -1,17 +1,17 @@
-import car1 from "../images/1.png";
-import car2 from "../images/2.png";
-import car3 from "../images/3.png";
-import car4 from "../images/4.png";
 import CarCard from "./carCard";
 import { selectCar, changeStatus } from "../../../../store/order/carSelect";
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchCar } from "./fetchCar";
+import { useEffect, useState } from "react";
+import { filterCar } from "./fetchCar";
+import { useGetCarsQuery } from "../../../../store/order/carStore";
 
 function CarSelect() {
   const dispatch = useDispatch();
-  const { id } = useSelector((store) => store.car);
+  const selectedCar = useSelector((store) => store.car);
+  const [carList, setCarList] = useState([]);
+  const [cathegoryList, setCathegoryList] = useState([]);
+  const { data, error, isLoading, isSuccess } = useGetCarsQuery();
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
@@ -20,14 +20,15 @@ function CarSelect() {
   }, []);
 
   useEffect(() => {
-    function errorHandler(err) {
-      console.error(err);
+    if (isSuccess) {
+      filterCar(data).then(({ carCategories, carData }) => {
+        setCarList(carData);
+        setCathegoryList([...carCategories]);
+      });
     }
-    fetchCar(errorHandler);
-    // eslint-disable-next-line
-  }, []);
+  }, [isSuccess]);
   //массив с объектами машинами
-  const cars = [
+  /*const cars = [
     {
       header: "ELANTRA",
       price: "15 000 - 25 000",
@@ -37,14 +38,15 @@ function CarSelect() {
     { header: "i30 N", price: "10 000 - 32 000", img: car2, id: "car12635" },
     { header: "CRETA", price: "12 000 - 25 000", img: car3, id: "car11532" },
     { header: "SONATA", price: "10 000 - 32 000", img: car4, id: "car12735" },
-  ];
+  ];*/
 
-  function setCarOnclick({ header, price, img, id }) {
+  function setCarOnclick({ name, priceMax, priceMin, imgUrl, id }) {
     const carObject = {
-      carModel: header,
-      carImg: img,
+      carModel: name,
+      carImg: imgUrl,
       id,
-      priceRange: price,
+      priceMax,
+      priceMin,
     };
     dispatch(selectCar(carObject));
     dispatch(userAccess(true));
@@ -94,7 +96,8 @@ function CarSelect() {
         </label>
       </form>
       <div className="order_cars_list">
-        {cars.map((car) => {
+        {
+          /*cars.map((car) => {
           return (
             <CarCard
               onClick={() => setCarOnclick(car)}
@@ -105,7 +108,24 @@ function CarSelect() {
               selected={car.id === id}
             />
           );
-        })}
+        })*/
+          carList.map((car) => {
+            const { name, id, priceMax, priceMin, thumbnail } = car;
+            const path = thumbnail.path;
+            const imgUrl = `https://api-factory.simbirsoft1.com${path}`;
+            return (
+              <CarCard
+                key={id}
+                name={name}
+                image={imgUrl}
+                startPrice={priceMin}
+                endPrice={priceMax}
+                onClick={() => setCarOnclick({ ...car, imgUrl })}
+                selected={selectedCar.id === id}
+              />
+            );
+          })
+        }
       </div>
     </div>
   );

@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cfe0b13-7166-44e2-92dc-20b33fc9f412" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/adressPage/adressPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/adressPage/adressPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/carPage/carSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/carPage/carSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/carPage/carSelectPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/carPage/carSelectPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/confirmPage/orderConfirmPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/confirmPage/orderConfirmPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/optionsPage/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/optionsPage/options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/optionsPage/optionsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderWindows/optionsPage/optionsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/orderPageComponents/orderInfo/orderInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/orderPageComponents/orderInfo/orderInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/order/carStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/order/carStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +27,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9cfe0b13-7166-44e2-92dc-20b33fc9f412" name="Default Changelist" comment="" />
@@ -38,8 +36,13 @@
       <option name="presentableId" value="Default" />
       <updated>1629915967456</updated>
       <workItem from="1629915973749" duration="50000" />
+      <workItem from="1630053486138" duration="672000" />
+      <workItem from="1630064567962" duration="1225000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -51,5 +54,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
