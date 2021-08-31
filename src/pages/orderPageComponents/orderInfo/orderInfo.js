@@ -48,7 +48,6 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
             Тариф: info.tariff,
             ...optionsObj,
           };
-          console.table(order);
           break;
         default:
           break;
@@ -62,7 +61,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
       const orderOption = (
         <OrderOptions key={key} optionName={key} optionValue={value} />
       );
-      orderArr.push(orderOption);
+      orderArr = orderArr.concat(orderOption);
     }
 
     setOrderList([...orderArr]);

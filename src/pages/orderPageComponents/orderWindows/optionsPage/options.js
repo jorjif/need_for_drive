@@ -12,7 +12,6 @@ import {
   changeTariff,
   addOption,
 } from "../../../../store/order/options";
-import { format } from "date-fns/fp";
 import { userAccess } from "../../../../store/order/orderAcess";
 import dateDifference from "./dateDifference";
 export default function Options() {
@@ -54,16 +53,7 @@ export default function Options() {
     dispatch(changeTariff(e.target.value));
   }
   function addOptionEvent(e) {
-    /*const hasProp = storeForOptions[e.target.name];
-    if (hasProp) {
-      dispatch(removeOption(e.target.name));
-      return;
-    }*/
     dispatch(addOption(e.target.name));
-  }
-
-  function checkOption(e) {
-    return storeForOptions[e.target.name];
   }
   return (
     <div className="order_options">
