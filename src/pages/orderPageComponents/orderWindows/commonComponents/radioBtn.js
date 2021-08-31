@@ -1,4 +1,18 @@
-function RadioButton({ name, id, value, defaultChecked, children }) {
+/**
+ *
+ * @param {*} props получает на вход name, id, value, checked, onClick
+ *  и использует проп children для текста в кнопке
+ * @returns радио кнопку, которые можно через name объединить в один сет
+ */
+function RadioButton({
+  name,
+  id,
+  value,
+  defaultChecked,
+  children,
+  checked,
+  onClick,
+}) {
   return (
     <label className="order_cars_input radio_container">
       <input
@@ -8,6 +22,8 @@ function RadioButton({ name, id, value, defaultChecked, children }) {
         value={value}
         className="order_radio"
         defaultChecked={defaultChecked}
+        checked={checked}
+        onClick={onClick}
       />
       <label htmlFor={id} className="radio_label">
         {children}
