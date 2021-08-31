@@ -1,13 +1,18 @@
 import AdressSelect from "./adressSelect";
-import OrderInfo from "../orderInfo/orderInfo";
+import OrderInfo from "../../orderInfo/orderInfo";
 import "./adressPage.scss";
 
-function AdressPage(props) {
+function AdressPage() {
   const adress = { "Пункт выдачи": "Ульяновск, Нариманова\u00A042" };
   return (
     <div className="page_order_content">
       <AdressSelect />
-      <OrderInfo link="/order/cars" btnContent="Выбрать модель" order={adress} />
+      <OrderInfo
+        link="/order/cars"
+        form="adress_form"
+        btnContent="Выбрать модель"
+        order={adress}
+      />
     </div>
   );
 }

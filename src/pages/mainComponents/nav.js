@@ -6,7 +6,7 @@ import { ReactComponent as InstaIcon } from "../icons/Instagram_white.svg";
 import { ReactComponent as FbIcon } from "../icons/Facebook_white.svg";
 import "./nav.scss";
 
-function NavBar(props) {
+function NavBar() {
   const [navStatus, setNav] = useState(false);
   const btnClass = classNames({
     nav_btn: true,

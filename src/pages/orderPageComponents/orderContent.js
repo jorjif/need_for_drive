@@ -1,20 +1,12 @@
 import { Route, Switch } from "react-router-dom";
-import AdressPage from "./orderWindows/adressPage";
-import CarsPage from "./orderWindows/carSelectPage";
-import OptionsPage from "./orderWindows/optionsPage";
-import OrderConfirmPage from "./orderWindows/orderConfirmPage";
-function OrderContent(props) {
+import AdressPage from "./orderWindows/adressPage/adressPage";
+import CarsPage from "./orderWindows/carPage/carSelectPage";
+import OptionsPage from "./orderWindows/optionsPage/optionsPage";
+import OrderConfirmPage from "./orderWindows/confirmPage/orderConfirmPage";
+function OrderContent() {
   return (
     <Switch>
-      <Route
-        path="/order/confirm"
-        render={() => (
-          <OrderConfirmPage
-            confirmEvent={props.confirmEvent}
-            isConfirmed={props.isConfirmed}
-          />
-        )}
-      />
+      <Route path="/order/confirm" render={() => <OrderConfirmPage />} />
       <Route path="/order/options/" render={() => <OptionsPage />} />
       <Route path="/order/cars/" render={() => <CarsPage />} />
       <Route path="/order/adress/" render={() => <AdressPage />} />

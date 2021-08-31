@@ -49,28 +49,36 @@
           display: none;
         }
       }
+      a:first-child {
+        @include orderPadding();
+        @include phone {
+          padding-left: 16px;
+        }
+        p {
+          padding-left: 0;
+        }
+      }
       &_element {
         margin: 0;
         padding: 0 16px;
-        color: #999999;
         font-weight: bold;
-
         @include phone {
           padding: 0 8px;
         }
-
-        &_first {
-          color: hsl(148, 87%, 41%);
-          @include phone {
-            padding-left: 16px;
-          }
+        &_first_order-number {
+          color: #121212;
+          font-weight: bold;
           @include orderPadding();
-          &_order-number {
-            color: #121212;
-            font-weight: bold;
-
-            @include orderPadding();
-          }
+        }
+        &_isActive {
+          color: hsl(148, 87%, 41%);
+        }
+        &_complete {
+          color: #121212;
+        }
+        &_blocked {
+          color: #999999;
+          pointer-events: none;
         }
       }
     }

@@ -1,9 +1,27 @@
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import { ReactComponent as Geo } from "../../icons/geomark.svg";
 import "./orderHeader.scss";
-function OrderHeader(props) {
+import { useSelector } from "react-redux";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
+
+function OrderHeader() {
+  const adressStatus = useSelector((store) => store.adress.status);
+  const carSelectStatus = useSelector((store) => store.car.status);
+  const optionsStatus = useSelector((store) => store.options.status);
+  const confirmationStatus = useSelector((store) => store.status.status);
+  const isConfirmed = useSelector((store) => store.status.orderConfirmed);
+  function classForMenu(status) {
+    return classNames({
+      order_header_nav_element: true,
+      order_header_nav_element_isActive: status === "in progress",
+      order_header_nav_element_complete: status === "complete",
+      order_header_nav_element_blocked: status === "blocked",
+    });
+  }
+
   function orderConfirmed() {
-    if (props.isConfirmed) {
+    if (isConfirmed) {
       return (
         <nav className="order_header_nav">
           <p className="order_header_nav_element_first_order-number">
@@ -12,20 +30,33 @@ function OrderHeader(props) {
         </nav>
       );
     }
+    function isDisabled(e, status) {
+      if (status === "blocked") {
+        e.preventDefault();
+      }
+    }
+
     return (
       <nav className="order_header_nav">
-        <p className="order_header_nav_element order_header_nav_element_first">
-          Местоположение
-        </p>
+        <Link to="/order/adress" onClick={(e) => isDisabled(e, adressStatus)}>
+          <p className={classForMenu(adressStatus)}>Местоположение</p>
+        </Link>
         <Arrow />
-        <p className="order_header_nav_element">Модель</p>
+        <Link to="/order/cars" onClick={(e) => isDisabled(e, carSelectStatus)}>
+          <p className={classForMenu(carSelectStatus)}>Модель</p>
+        </Link>
         <Arrow />
-        <p className="order_header_nav_element">Дополнительно</p>
+        <Link to="/order/options" onClick={(e) => isDisabled(e, optionsStatus)}>
+          <p className={classForMenu(optionsStatus)}>Дополнительно</p>
+        </Link>
         <Arrow />
-        <p className="order_header_nav_element">Итоги</p>
+        <Link to="/order/confirm" onClick={(e) => isDisabled(e, confirmationStatus)}>
+          <p className={classForMenu(confirmationStatus)}>Итоги</p>
+        </Link>
       </nav>
     );
   }
+
   return (
     <div className="order_header">
       <header className="order_header_header">
