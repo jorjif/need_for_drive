@@ -5,7 +5,7 @@ import { useGetCarsQuery } from "../../../../store/order/carStore";
 import "./carSelect.scss";
 
 function CarsPage() {
-  const { error, isLoading, isSuccess, isFetching, isError } = useGetCarsQuery();
+  const { error, isLoading, isFetching, isError } = useGetCarsQuery();
   return (
     <div className="page_order_content">
       <StatusHandler

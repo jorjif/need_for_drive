@@ -13,7 +13,7 @@ function CarSelect() {
   const [carList, setCarList] = useState([]);
   const [cathegoryList, setCathegoryList] = useState([]);
   const [chosenCathegory, setChosenCathegory] = useState("");
-  const { data, error, isLoading, isSuccess } = useGetCarsQuery();
+  const { data, isSuccess } = useGetCarsQuery();
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
@@ -28,15 +28,27 @@ function CarSelect() {
         setCathegoryList([...carCategories]);
       });
     }
-  }, [isSuccess]);
+  }, [isSuccess, data]);
 
-  function setCarOnclick({ name, priceMax, priceMin, imgUrl, id }) {
+  function setCarOnclick({
+    name,
+    priceMax,
+    priceMin,
+    imgUrl,
+    id,
+    number,
+    colors,
+    tank,
+  }) {
     const carObject = {
       carModel: name,
       carImg: imgUrl,
       id,
       priceMax,
       priceMin,
+      plate: number,
+      colors: [...colors],
+      fuel: tank,
     };
     dispatch(selectCar(carObject));
     dispatch(userAccess(true));
@@ -51,7 +63,7 @@ function CarSelect() {
           name="class"
           id="any"
           value=""
-          onClick={setCathegoryOnclick}
+          onChange={setCathegoryOnclick}
           checked={chosenCathegory === ""}
         >
           Все модели
@@ -63,7 +75,7 @@ function CarSelect() {
               id={cathegory}
               value={cathegory}
               key={cathegory}
-              onClick={setCathegoryOnclick}
+              onChange={setCathegoryOnclick}
               checked={chosenCathegory === cathegory}
             >
               {cathegory}

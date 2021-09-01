@@ -6,6 +6,8 @@ const initialState = {
   priceMin: 0,
   carImg: "",
   id: "",
+  colors: [],
+  plate: "",
   status: "blocked",
 };
 const carSelect = createSlice({
@@ -13,7 +15,8 @@ const carSelect = createSlice({
   initialState,
   reducers: {
     selectCar(state, action) {
-      const { carImg, carModel, id, priceMax, priceMin } = action.payload;
+      const { carImg, carModel, id, priceMax, priceMin, plate, colors, fuel } =
+        action.payload;
       return {
         carModel,
         priceMax,
@@ -21,6 +24,9 @@ const carSelect = createSlice({
         carImg,
         id,
         status: state.status,
+        plate,
+        colors,
+        fuel,
       };
     },
     changeStatus(state, action) {
