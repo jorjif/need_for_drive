@@ -36,11 +36,11 @@ const optionsSlice = createSlice({
     },
 
     changeStartDate({ date }, action) {
-      date.from = action.payload.toDateString();
+      date.from = action.payload;
     },
 
     changeEndDate({ date }, action) {
-      date.to = action.payload.toDateString();
+      date.to = action.payload;
     },
 
     changeDateDifference(store, action) {
