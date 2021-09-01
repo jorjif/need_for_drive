@@ -1,5 +1,11 @@
 import PageLoading from "./componentLoad";
 import "./statusHandler.scss";
+/**
+ *
+ * @param {*} props {isFetching, isError, error, children} получает пропсы состояния
+ * загрузки данных. Первые два пропа - булеаны.
+ * @returns свитч-обертка между окном подгрузки, сообщением об ошибке и контентом страницы
+ */
 function StatusHandler({ isFetching, isError, error, children }) {
   if (isFetching) {
     return <PageLoading />;

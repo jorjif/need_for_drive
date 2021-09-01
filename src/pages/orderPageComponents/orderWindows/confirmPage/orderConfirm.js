@@ -2,21 +2,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { changeStatus } from "../../../../store/order/confirmation";
 export default function OrderConfirm() {
-  const { carModel, carImg } = useSelector((store) => store.car);
+  const { carModel, carImg, plate, fuel } = useSelector((store) => store.car);
   const { from } = useSelector((store) => store.options.date);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
+    // eslint-disable-next-line
   }, []);
-  //заглушки, потом будет взято с сервера
-  const fuel = "4%";
-  const number = "У127ЕК123";
+
   return (
     <div className="order_confirm">
       <div className="order_confirm_info">
         <h1 className="order_confirm_info_car">{carModel}</h1>
-        <p className="order_confirm_info_plate">{number}</p>
+        <p className="order_confirm_info_plate">{plate}</p>
         <p className="order_confirm_info_additional">
           <span>Топливо </span>
           {fuel}%

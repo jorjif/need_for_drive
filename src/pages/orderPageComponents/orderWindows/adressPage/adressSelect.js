@@ -17,6 +17,7 @@ function AdressSelect() {
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
+    // eslint-disable-next-line
   }, []);
   const datalist = [
     { city: "Ульяновск", street: ["Нариманова 42", "Крымова 8"] },
@@ -43,6 +44,7 @@ function AdressSelect() {
     if (street && !comparedStreet) {
       dispatch(streetChanged(""));
     }
+    // eslint-disable-next-line
   }, [streetInput, cityInput]);
   useEffect(() => {
     if (street && city) {
