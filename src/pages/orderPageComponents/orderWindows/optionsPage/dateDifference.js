@@ -1,3 +1,9 @@
+/**
+ *
+ * @param {*} dateFrom начальная дата
+ * @param {*} dateTo конечная дата
+ * @returns разницу между датами в днях-часах
+ */
 function dateDifference(dateFrom, dateTo) {
   const difference = dateTo.getTime() - dateFrom.getTime();
   const msInHour = 3600000;
