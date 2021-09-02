@@ -17,8 +17,7 @@ function AdressSelect() {
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
   const datalist = [
     { city: "Ульяновск", street: ["Нариманова 42", "Крымова 8"] },
     { city: "Краснодар", street: ["Московская 2", "Красная 154"] },

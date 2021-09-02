@@ -9,8 +9,7 @@ export default function OrderConfirm() {
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="order_confirm">

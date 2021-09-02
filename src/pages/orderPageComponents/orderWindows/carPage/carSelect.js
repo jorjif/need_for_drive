@@ -18,8 +18,7 @@ function CarSelect() {
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
   //распределяет фильтрованную с сервера инфу
   useEffect(() => {
     if (isSuccess) {
@@ -64,7 +63,7 @@ function CarSelect() {
           id="any"
           value=""
           onChange={setCathegoryOnclick}
-          checked={chosenCathegory === ""}
+          checked={!chosenCathegory}
         >
           Все модели
         </RadioButton>

@@ -29,8 +29,7 @@ export default function Options() {
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     //если начальная дата меньше конечной - отправляет значение в стор, пропускает в следующий шаг
@@ -47,8 +46,7 @@ export default function Options() {
     if (dateFrom > dateTo) {
       dispatch(userAccess(false));
     }
-    // eslint-disable-next-line
-  }, [dateFrom, dateTo]);
+  }, [dateFrom, dateTo, dispatch]);
 
   useEffect(() => {
     if (isSucces) {
