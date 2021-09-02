@@ -74,7 +74,7 @@ export default function Options() {
                 name="color"
                 id="any"
                 value=""
-                checked={color === ""}
+                checked={!color}
                 onChange={getColor}
               >
                 Любой
