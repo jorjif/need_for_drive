@@ -22,10 +22,9 @@ function CarSelect() {
   //распределяет фильтрованную с сервера инфу
   useEffect(() => {
     if (isSuccess) {
-      filterCar(data).then(({ carCategories, carData }) => {
-        setCarList(carData);
-        setCathegoryList([...carCategories]);
-      });
+      const { carCategories, carData } = filterCar(data);
+      setCarList(carData);
+      setCathegoryList([...carCategories]);
     }
   }, [isSuccess, data]);
 
