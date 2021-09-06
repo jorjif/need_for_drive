@@ -83,7 +83,7 @@ export const databaseApi = createApi({
           //заполняем массив streets адресами из фильтрованного массива
           streetsOfCity.forEach((street) => {
             mainAdressStructure.streets.push({
-              street: street.adress,
+              street: street.address,
               id: street.id,
               name: street.name,
             });

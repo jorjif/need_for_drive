@@ -21,16 +21,15 @@ function AdressSelect() {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
   }, [dispatch]);
-  const datalist = [
-    { city: "Ульяновск", street: ["Нариманова 42", "Крымова 8"] },
-    { city: "Краснодар", street: ["Московская 2", "Красная 154"] },
-  ];
+
   //useEffect для проверки допуска на следующий шаг и отправки значений в стор
   useEffect(() => {
     //проверяет соответствует ли инпут доступным городам
     const comparedCity = data.find((elem) => elem.city === cityInput);
     const comparedStreet = data.find(
-      (elem) => (elem.city === cityInput) & elem.streets.street.includes(streetInput)
+      (elem) =>
+        elem.city === cityInput &&
+        elem.streets.find(({ street }) => street === streetInput)
     );
     //если инпут соответствует - отправляет стейт в стор
     if (comparedCity) {
@@ -80,8 +79,8 @@ function AdressSelect() {
 
   function optionsWithCity(adressArr) {
     const cityIndex = adressArr.find((elem) => elem.city === city);
-    return cityIndex?.street.map((streetElem) => (
-      <option value={streetElem} key={streetElem} />
+    return cityIndex?.streets.map(({ street, id }) => (
+      <option value={street} key={id} />
     ));
   }
   return (
@@ -97,8 +96,8 @@ function AdressSelect() {
             required
           />
           <datalist id="order_adress_city">
-            {datalist.map((adressObj) => {
-              return <option value={adressObj.city} key={adressObj.city} />;
+            {data.map((adressObj) => {
+              return <option value={adressObj.city} key={adressObj.id} />;
             })}
           </datalist>
           <button
@@ -117,7 +116,7 @@ function AdressSelect() {
             onChange={streetOnChange}
             required
           />
-          <datalist id="order_adress_street">{optionsWithCity(datalist)}</datalist>
+          <datalist id="order_adress_street">{optionsWithCity(data)}</datalist>
           <button
             className="order_adress_search_input_delete street"
             onClick={deleteButtonClick}
