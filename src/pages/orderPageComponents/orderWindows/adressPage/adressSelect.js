@@ -8,11 +8,14 @@ import {
 } from "../../../../store/order/adress";
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useEffect, useState } from "react";
+import { useGetAdressInfoQuery } from "../../../../store/order/carStore";
+
 function AdressSelect() {
   const [cityInput, setCityInput] = useState("");
   const [streetInput, setStreetInput] = useState("");
   const { city, street } = useSelector((store) => store.adress);
   const dispatch = useDispatch();
+  const { data, success } = useGetAdressInfoQuery();
   //useEffect при маунте и анмаунте компонента устанавливает его статус
   useEffect(() => {
     dispatch(changeStatus("in progress"));
@@ -25,9 +28,9 @@ function AdressSelect() {
   //useEffect для проверки допуска на следующий шаг и отправки значений в стор
   useEffect(() => {
     //проверяет соответствует ли инпут доступным городам
-    const comparedCity = datalist.find((elem) => elem.city === cityInput);
-    const comparedStreet = datalist.find(
-      (elem) => (elem.city === cityInput) & elem.street.includes(streetInput)
+    const comparedCity = data.find((elem) => elem.city === cityInput);
+    const comparedStreet = data.find(
+      (elem) => (elem.city === cityInput) & elem.streets.street.includes(streetInput)
     );
     //если инпут соответствует - отправляет стейт в стор
     if (comparedCity) {
@@ -50,6 +53,7 @@ function AdressSelect() {
       dispatch(userAccess(true));
     }
   });
+  useEffect(() => {}, []);
   function cityOnChange(e) {
     const value = e.target.value;
     setCityInput(value);

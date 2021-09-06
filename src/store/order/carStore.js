@@ -43,7 +43,58 @@ export const databaseApi = createApi({
         };
       },
     }),
+    getAdressInfo: builders.query({
+      query: () => {
+        return {
+          url: "db/point",
+          method: "GET",
+          headers: {
+            "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+            Authorization: "Bearer 4cbcea96de",
+          },
+        };
+      },
+      /*
+      этот ужас который я называю структурой данных возвращает массив
+      каждый элемент которого - объект с id города и его названием, а так же массивом улиц
+      каждый элемент массива - объект с id адреса, его названием и небольшим описанием
+      */
+      transformResponse: ({ data }) => {
+        //фильтруем так, чтоб была информация о городе
+        const filteredData = data.filter((adress) => adress.cityId);
+        //нааходим уникальные города
+        const cities = filteredData.reduce(
+          (accum, { cityId }) => accum.add(cityId.name),
+          new Set()
+        );
+        //превращаем Set в массив
+        const citiesArr = [...cities];
+        const citiesWithStreets = citiesArr.map((city) => {
+          //находим все адреса в который указан город
+          const streetsOfCity = filteredData.filter(
+            ({ cityId }) => cityId.name === city
+          );
+          //создаем объект который будем возвращать
+          const mainAdressStructure = {
+            city,
+            id: streetsOfCity[0].cityId.id,
+            streets: [],
+          };
+          //заполняем массив streets адресами из фильтрованного массива
+          streetsOfCity.forEach((street) => {
+            mainAdressStructure.streets.push({
+              street: street.adress,
+              id: street.id,
+              name: street.name,
+            });
+          });
+          return mainAdressStructure;
+        });
+        return citiesWithStreets;
+      },
+    }),
   }),
 });
 
-export const { useGetCarsQuery, useGetTariffInfoQuery } = databaseApi;
+export const { useGetCarsQuery, useGetTariffInfoQuery, useGetAdressInfoQuery } =
+  databaseApi;
