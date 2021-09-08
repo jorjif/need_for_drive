@@ -9,13 +9,14 @@ import {
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useEffect, useState } from "react";
 import { useGetAdressInfoQuery } from "../../../../store/order/carStore";
+import MapElem from "./map";
 
 function AdressSelect() {
   const [cityInput, setCityInput] = useState("");
   const [streetInput, setStreetInput] = useState("");
   const { city, street } = useSelector((store) => store.adress);
   const dispatch = useDispatch();
-  const { data, success } = useGetAdressInfoQuery();
+  const { data } = useGetAdressInfoQuery();
   //useEffect при маунте и анмаунте компонента устанавливает его статус
   useEffect(() => {
     dispatch(changeStatus("in progress"));
@@ -127,11 +128,7 @@ function AdressSelect() {
       </form>
       <div className="order_adress_map">
         <p>Пункт выдачи</p>
-        <img
-          className="order_adress_map_map"
-          src={Map}
-          alt="карта выбора места посадки"
-        />
+        <MapElem data={data} />
       </div>
     </div>
   );
