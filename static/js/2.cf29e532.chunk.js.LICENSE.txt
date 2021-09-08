@@ -10,6 +10,42 @@ object-assign
   http://jedwatson.github.io/classnames
 */
 
+/*!
+ * node-inherit
+ * Copyright(c) 2011 Dmitry Filatov <dfilatov@yandex-team.ru>
+ * MIT Licensed
+ */
+
+/**
+ * @license
+ * lodash 3.10.1 (Custom Build) <https://lodash.com/>
+ * Build: `lodash modern -d -o ./index.js`
+ * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * Available under MIT license <https://lodash.com/license>
+ */
+
+/**
+ * @module vow
+ * @author Filatov Dmitry <dfilatov@yandex-team.ru>
+ * @version 0.4.20
+ * @license
+ * Dual licensed under the MIT and GPL licenses:
+ *   * http://www.opensource.org/licenses/mit-license.php
+ *   * http://www.gnu.org/licenses/gpl.html
+ */
+
+/**
+ * @module vow-queue
+ * @author Filatov Dmitry <dfilatov@yandex-team.ru>
+ * @version 0.4.3
+ * @license
+ * Dual licensed under the MIT and GPL licenses:
+ *   * http://www.opensource.org/licenses/mit-license.php
+ *   * http://www.gnu.org/licenses/gpl.html
+ */
+
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
