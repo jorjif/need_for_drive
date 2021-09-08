@@ -60,3 +60,8 @@
     }
   }
 }
+
+.map_element {
+  width: clamp(300px, 48vw, 736px);
+  height: 300px;
+}

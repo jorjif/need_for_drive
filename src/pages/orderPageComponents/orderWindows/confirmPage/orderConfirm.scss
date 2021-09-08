@@ -45,6 +45,9 @@
   &_car {
     max-width: 256px;
     height: auto;
+    img {
+      max-width: 256px;
+    }
   }
   &_popup {
     position: absolute;
