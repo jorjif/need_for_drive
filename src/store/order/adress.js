@@ -16,12 +16,14 @@ const adressSlice = createSlice({
     },
 
     cityChanged(state, action) {
-      state.city = action.payload;
+      state.city = action.payload.name;
+      state.cityId = action.payload.id;
     },
 
     streetChanged(state, action) {
-      state.street = action.payload;
-      const streetNoSpace = action.payload.replace(" ", "\u00A0");
+      state.street = action.payload.name;
+      state.pointId = action.payload.id;
+      const streetNoSpace = action.payload.name.replaceAll(" ", "\u00A0");
       state.streetNoSpace = streetNoSpace;
     },
   },

@@ -10,7 +10,6 @@ const initialState = {
     difference: "",
   },
   tariff: "Поминутно",
-  options: [],
   isFullTank: {
     status: false,
     ruName: "Полный бак",
@@ -35,20 +34,6 @@ const optionsSlice = createSlice({
   reducers: {
     changeColor(store, action) {
       store.color = action.payload;
-    },
-
-    addOption(store, action) {
-      return {
-        ...store,
-        options: {
-          ...store.options,
-          [action.payload]: true,
-        },
-      };
-    },
-
-    removeOption(store, action) {
-      store.optionsSlice.options[action.payload] = false;
     },
 
     changeStartDate({ date }, action) {

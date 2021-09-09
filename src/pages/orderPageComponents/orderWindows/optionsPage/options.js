@@ -9,7 +9,6 @@ import {
   changeEndDate,
   changeDateDifference,
   changeTariff,
-  addOption,
   setOption,
 } from "../../../../store/order/options";
 import { userAccess } from "../../../../store/order/orderAcess";
@@ -65,10 +64,7 @@ export default function Options() {
   function setOptionEvent(e) {
     dispatch(setOption(e.target.name));
   }
-  /*
-  function addOptionEvent(e) {
-    dispatch(addOption(e.target.name));
-  }*/
+
   return (
     <div className="order_options">
       <form>

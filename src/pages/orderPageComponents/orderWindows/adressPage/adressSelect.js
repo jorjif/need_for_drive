@@ -1,5 +1,4 @@
 import { ReactComponent as Delete } from "../../../icons/deleteCross.svg";
-import Map from "../../../icons/orderMap.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
   cityChanged,
@@ -27,24 +26,22 @@ function AdressSelect() {
   useEffect(() => {
     //проверяет соответствует ли инпут доступным городам
     const comparedCity = data.find((elem) => elem.city === cityInput);
-    const comparedStreet = data.find(
-      (elem) =>
-        elem.city === cityInput &&
-        elem.streets.find(({ street }) => street === streetInput)
+    const comparedStreet = comparedCity?.streets.find(
+      ({ street }) => street === streetInput
     );
     //если инпут соответствует - отправляет стейт в стор
     if (comparedCity) {
-      dispatch(cityChanged(cityInput));
+      dispatch(cityChanged({ name: cityInput, id: comparedCity.id }));
     }
     //если город выставлен, но изменен на неверное значение - стор отчищается
     if (city && !comparedCity) {
-      dispatch(cityChanged(""));
+      dispatch(cityChanged({ name: "", id: "" }));
     }
     if (comparedStreet) {
-      dispatch(streetChanged(streetInput));
+      dispatch(streetChanged({ name: streetInput, id: comparedStreet.id }));
     }
     if (street && !comparedStreet) {
-      dispatch(streetChanged(""));
+      dispatch(streetChanged({ name: "", id: "" }));
     }
     // eslint-disable-next-line
   }, [streetInput, cityInput]);
@@ -67,11 +64,11 @@ function AdressSelect() {
     e.preventDefault();
     if (type === "city") {
       setCityInput("");
-      dispatch(cityChanged(""));
+      dispatch(cityChanged({ name: "", id: "" }));
       return;
     }
     setStreetInput("");
-    dispatch(streetChanged(""));
+    dispatch(streetChanged({ name: "", id: "" }));
   }
 
   function onSubmit(e) {
