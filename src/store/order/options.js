@@ -10,7 +10,23 @@ const initialState = {
     difference: "",
   },
   tariff: "Поминутно",
-  options: {},
+  options: [],
+  isFullTank: {
+    status: false,
+    ruName: "Полный бак",
+    price: 500,
+  },
+  isNeedChildChair: {
+    status: false,
+    ruName: "Детское кресло",
+    price: 200,
+  },
+  isRightWheel: {
+    status: false,
+    ruName: "Правый руль",
+    price: 1600,
+  },
+
   status: "blocked",
 };
 const optionsSlice = createSlice({
@@ -50,6 +66,17 @@ const optionsSlice = createSlice({
     changeTariff(store, action) {
       store.tariff = action.payload;
     },
+    setOption(store, action) {
+      if (action.payload === "fullTank") {
+        store.isFullTank.status = !store.isFullTank.status;
+      }
+      if (action.payload === "needChildChair") {
+        store.isNeedChildChair.status = !store.isNeedChildChair.status;
+      }
+      if (action.payload === "rightWheel") {
+        store.isRightWheel.status = !store.isRightWheel.status;
+      }
+    },
 
     changeStatus(state, action) {
       state.status = action.payload;
@@ -65,5 +92,6 @@ export const {
   changeTariff,
   addOption,
   removeOption,
+  setOption,
 } = optionsSlice.actions;
 export default optionsSlice.reducer;

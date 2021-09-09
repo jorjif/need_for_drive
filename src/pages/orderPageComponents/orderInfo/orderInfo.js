@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
-  const [orderList, setOrderList] = useState([]); //массив с OrderOptions - деталями заказа, который составляет пользователь
+  //массив с OrderOptions - деталями заказа, который составляет пользователь
+  const [orderList, setOrderList] = useState([]);
   const accessToNext = useSelector((store) => store.access.access);
   const adressInfo = useSelector((store) => store.adress);
   const carInfo = useSelector((store) => store.car);
@@ -35,18 +36,17 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
           };
           break;
         case 2:
-          //опции - объект внутри массива
-          const options = Object.keys(info.options);
-          //модифицируем объект так, чтоб каждый ключ имел значение да
-          const optionsObj = options.reduce((accum, option) => {
-            return { ...accum, [option]: "Да" };
-          }, {});
+          const { color, date, tariff, isFullTank, isNeedChildChair, isRightWheel } =
+            info;
+
           order = {
             ...order,
-            Цвет: info.color,
-            "Длительность аренды": info.date.difference,
-            Тариф: info.tariff,
-            ...optionsObj,
+            Цвет: color,
+            "Длительность аренды": date.difference,
+            Тариф: tariff,
+            [`${isFullTank.ruName}`]: isFullTank.status ? "да" : "нет",
+            [`${isNeedChildChair.ruName}`]: isNeedChildChair.status ? "да" : "нет",
+            [`${isRightWheel.ruName}`]: isRightWheel.status ? "да" : "нет",
           };
           break;
         default:

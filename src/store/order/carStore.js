@@ -93,6 +93,19 @@ export const databaseApi = createApi({
         return citiesWithStreets;
       },
     }),
+    postOrder: builders.query({
+      query: (orderDetails) => {
+        return {
+          url: "db/order",
+          method: "POST",
+          headers: {
+            "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+            Authorization: "Bearer 4cbcea96de",
+          },
+          body: orderDetails,
+        };
+      },
+    }),
   }),
 });
 

@@ -10,6 +10,7 @@ import {
   changeDateDifference,
   changeTariff,
   addOption,
+  setOption,
 } from "../../../../store/order/options";
 import { userAccess } from "../../../../store/order/orderAcess";
 import dateDifference from "./dateDifference";
@@ -60,9 +61,14 @@ export default function Options() {
   function getTariff(e) {
     dispatch(changeTariff(e.target.value));
   }
+
+  function setOptionEvent(e) {
+    dispatch(setOption(e.target.name));
+  }
+  /*
   function addOptionEvent(e) {
     dispatch(addOption(e.target.name));
-  }
+  }*/
   return (
     <div className="order_options">
       <form>
@@ -161,27 +167,27 @@ export default function Options() {
             <CheckboxBtn
               type="checkbox"
               id="full"
-              name="полный бак"
+              name="fullTank"
               value="да"
-              onChange={addOptionEvent}
+              onChange={setOptionEvent}
             >
               Полный бак, 500р
             </CheckboxBtn>
             <CheckboxBtn
               type="checkbox"
               id="childseat"
-              name="детское кресло"
+              name="needChildChair"
               value="да"
-              onChange={addOptionEvent}
+              onChange={setOptionEvent}
             >
               Детское кресло, 200р
             </CheckboxBtn>
             <CheckboxBtn
               type="checkbox"
               id="jdm"
-              name="правый руль"
+              name="rightWheel"
               value="да"
-              onChange={addOptionEvent}
+              onChange={setOptionEvent}
             >
               Правый руль, 1600р
             </CheckboxBtn>

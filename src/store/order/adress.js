@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   city: "",
+  cityId: "",
   street: "",
+  pointId: "",
   streetNoSpace: "",
   status: "blocked",
 };
