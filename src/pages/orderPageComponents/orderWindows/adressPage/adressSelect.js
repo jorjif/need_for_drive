@@ -19,8 +19,10 @@ function AdressSelect() {
   //useEffect при маунте и анмаунте компонента устанавливает его статус
   useEffect(() => {
     dispatch(changeStatus("in progress"));
+    setCityInput(city);
+    setStreetInput(street);
     return () => dispatch(changeStatus("complete"));
-  }, [dispatch]);
+  }, []);
 
   //useEffect для проверки допуска на следующий шаг и отправки значений в стор
   useEffect(() => {

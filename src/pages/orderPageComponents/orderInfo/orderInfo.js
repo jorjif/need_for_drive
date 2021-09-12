@@ -12,12 +12,15 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
   const adressInfo = useSelector((store) => store.adress);
   const carInfo = useSelector((store) => store.car);
   const optionsInfo = useSelector((store) => store.options);
+  const { startPrice, maxPrice } = useSelector((store) => store.price);
 
   useEffect(() => {
     //создает массив из частей стора с данными
     const orderInfoArr = [adressInfo, carInfo, optionsInfo];
     //фильтрует массив оставляя только выполненные
-    const completedSteps = orderInfoArr.filter((step) => step.status === "complete");
+    const completedSteps = orderInfoArr.filter(
+      (step) => step.status === "complete" || step.status === "in progress"
+    );
     //объект с заказом через который затем будет итерироваться цикл
     let order = {};
     completedSteps.forEach((info, index) => {
@@ -116,7 +119,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
       </div>
       <div className="order_price_final">
         <p>
-          <span>Цена:</span> от 8 000 до 12 000
+          <span>Цена:</span> {startPrice ? `от ${startPrice} до ${maxPrice}` : ""}
         </p>
         {buttonType()}
       </div>

@@ -9,6 +9,7 @@ import {
   changeEndDate,
   changeDateDifference,
   changeTariff,
+  changeTariffId,
   setOption,
 } from "../../../../store/order/options";
 import { userAccess } from "../../../../store/order/orderAcess";
@@ -17,13 +18,14 @@ import { useGetTariffInfoQuery } from "../../../../store/order/carStore";
 import CheckboxBtn from "../commonComponents/checkboxBtn";
 import RadioButton from "../commonComponents/radioBtn";
 import { format } from "date-fns";
+import { addPrice } from "../../../../store/order/price";
 
 export default function Options() {
   const [dateFrom, setDateFrom] = useState(new Date());
   const [dateTo, setDateTo] = useState(new Date());
   const { color, tariff } = useSelector((store) => store.options);
   const { colors } = useSelector((store) => store.car);
-  const { data, isSucces } = useGetTariffInfoQuery();
+  const { data } = useGetTariffInfoQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,21 +50,18 @@ export default function Options() {
     }
   }, [dateFrom, dateTo, dispatch]);
 
-  useEffect(() => {
-    if (isSucces) {
-    }
-  }, [isSucces, data]);
-
   function getColor(e) {
     dispatch(changeColor(e.target.value));
   }
 
-  function getTariff(e) {
+  function getTariff(e, id) {
     dispatch(changeTariff(e.target.value));
+    dispatch(changeTariffId(id));
   }
 
   function setOptionEvent(e) {
     dispatch(setOption(e.target.name));
+    dispatch(addPrice(e.target.value));
   }
 
   return (
@@ -142,6 +141,7 @@ export default function Options() {
                 const {
                   price,
                   rateTypeId: { name, unit },
+                  id,
                 } = tariffUnit;
                 return (
                   <RadioButton
@@ -149,8 +149,10 @@ export default function Options() {
                     id={name}
                     value={name}
                     checked={tariff === name}
-                    onChange={getTariff}
-                    key={name}
+                    onChange={(e) => {
+                      getTariff(e, id);
+                    }}
+                    key={id}
                   >{`${name}, ${price}₽/${unit}`}</RadioButton>
                 );
               })
@@ -164,7 +166,7 @@ export default function Options() {
               type="checkbox"
               id="full"
               name="fullTank"
-              value="да"
+              value="500"
               onChange={setOptionEvent}
             >
               Полный бак, 500р
@@ -173,7 +175,7 @@ export default function Options() {
               type="checkbox"
               id="childseat"
               name="needChildChair"
-              value="да"
+              value="200"
               onChange={setOptionEvent}
             >
               Детское кресло, 200р
@@ -182,7 +184,7 @@ export default function Options() {
               type="checkbox"
               id="jdm"
               name="rightWheel"
-              value="да"
+              value="1600"
               onChange={setOptionEvent}
             >
               Правый руль, 1600р

@@ -2,8 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   carModel: "",
-  priceMax: 0,
-  priceMin: 0,
   carImg: "",
   id: "",
   colors: [],
@@ -15,12 +13,9 @@ const carSelect = createSlice({
   initialState,
   reducers: {
     selectCar(state, action) {
-      const { carImg, carModel, id, priceMax, priceMin, plate, colors, fuel } =
-        action.payload;
+      const { carImg, carModel, id, plate, colors, fuel } = action.payload;
       return {
         carModel,
-        priceMax,
-        priceMin,
         carImg,
         id,
         status: state.status,

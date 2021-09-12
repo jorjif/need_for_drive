@@ -10,6 +10,7 @@ const initialState = {
     difference: "",
   },
   tariff: "Поминутно",
+  tariffId: "",
   isFullTank: {
     status: false,
     ruName: "Полный бак",
@@ -51,6 +52,10 @@ const optionsSlice = createSlice({
     changeTariff(store, action) {
       store.tariff = action.payload;
     },
+    changeTariffId(store, action) {
+      store.tariffId = action.payload;
+    },
+
     setOption(store, action) {
       if (action.payload === "fullTank") {
         store.isFullTank.status = !store.isFullTank.status;
@@ -75,6 +80,7 @@ export const {
   changeColor,
   changeDateDifference,
   changeTariff,
+  changeTariffId,
   addOption,
   removeOption,
   setOption,

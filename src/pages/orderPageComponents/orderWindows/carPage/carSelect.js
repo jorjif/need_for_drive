@@ -3,30 +3,23 @@ import { selectCar, changeStatus } from "../../../../store/order/carSelect";
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { filterCar } from "./fetchCar";
 import { useGetCarsQuery } from "../../../../store/order/carStore";
+import { setMaxPrice, setStartPrice } from "../../../../store/order/price";
 import RadioButton from "../commonComponents/radioBtn";
 
 function CarSelect() {
   const dispatch = useDispatch();
   const selectedCar = useSelector((store) => store.car);
-  const [carList, setCarList] = useState([]);
-  const [cathegoryList, setCathegoryList] = useState([]);
   const [chosenCathegory, setChosenCathegory] = useState("");
-  const { data, isSuccess } = useGetCarsQuery();
+  const {
+    data: { carData, carCategories },
+  } = useGetCarsQuery();
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
     return () => dispatch(changeStatus("complete"));
   }, [dispatch]);
   //распределяет фильтрованную с сервера инфу
-  useEffect(() => {
-    if (isSuccess) {
-      const { carCategories, carData } = filterCar(data);
-      setCarList(carData);
-      setCathegoryList([...carCategories]);
-    }
-  }, [isSuccess, data]);
 
   function setCarOnclick({
     name,
@@ -42,13 +35,13 @@ function CarSelect() {
       carModel: name,
       carImg: imgUrl,
       id,
-      priceMax,
-      priceMin,
       plate: number,
       colors: [...colors],
       fuel: tank,
     };
     dispatch(selectCar(carObject));
+    dispatch(setMaxPrice(priceMax));
+    dispatch(setStartPrice(priceMin));
     dispatch(userAccess(true));
   }
   function setCathegoryOnclick(e) {
@@ -66,7 +59,7 @@ function CarSelect() {
         >
           Все модели
         </RadioButton>
-        {cathegoryList.map((cathegory) => {
+        {carCategories.map((cathegory) => {
           return (
             <RadioButton
               name="class"
@@ -82,7 +75,7 @@ function CarSelect() {
         })}
       </form>
       <div className="order_cars_list">
-        {carList
+        {carData
           .filter(({ categoryId }) => categoryId.name.includes(chosenCathegory))
           .map((car) => {
             const { name, id, priceMax, priceMin, thumbnail } = car;

@@ -28,7 +28,16 @@ export const databaseApi = createApi({
           //ну и у авто должна быть категория для их фильтрции, те которые ее не имеют - в сброс
           return nameComparasing && carObj.categoryId && imgPathCheck;
         });
-        return filteredData;
+
+        const categories = filteredData.reduce(
+          (accumulator, { categoryId }) => accumulator.add(categoryId.name),
+          new Set() //Set чтоб сюда попадали только уникальные значения
+        );
+        return {
+          carCategories: [...categories],
+          carData: filteredData,
+        };
+        //return filteredData;
       },
     }),
     getTariffInfo: builders.query({
@@ -106,8 +115,22 @@ export const databaseApi = createApi({
         };
       },
     }),
+    getOrder: builders.query({
+      query: () => ({
+        url: "db/order",
+        method: "GET",
+        headers: {
+          "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+          Authorization: "Bearer 4cbcea96de",
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetCarsQuery, useGetTariffInfoQuery, useGetAdressInfoQuery } =
-  databaseApi;
+export const {
+  useGetCarsQuery,
+  useGetTariffInfoQuery,
+  useGetAdressInfoQuery,
+  useGetOrderQuery,
+} = databaseApi;
