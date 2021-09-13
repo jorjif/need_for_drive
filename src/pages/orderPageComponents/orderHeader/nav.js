@@ -9,6 +9,7 @@ function NavbarElement() {
   const optionsStatus = useSelector((store) => store.options.status);
   const confirmationStatus = useSelector((store) => store.status.status);
   const isConfirmed = useSelector((store) => store.status.orderConfirmed);
+
   function classForMenu(status) {
     return classNames({
       order_header_nav_element: true,

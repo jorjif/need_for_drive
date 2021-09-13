@@ -5,9 +5,12 @@ import car2 from "../images/2.png";
 import "./orderConfirm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmOrder, popupCloseOpen } from "../../../../store/order/confirmation";
+import StatusHandler from "../commonComponents/statushandlerPage";
+import { useGetOrderStatusQuery } from "../../../../store/order/carStore";
 
 export default function OrderConfirmPage() {
   const { orderConfirmed } = useSelector((store) => store.status);
+  const { error, isLoading, isFetching, isError } = useGetOrderStatusQuery();
   const dispatch = useDispatch();
   function confirmEvent() {
     dispatch(confirmOrder(false));
@@ -19,7 +22,14 @@ export default function OrderConfirmPage() {
   return (
     <div className="page_order_content">
       <ConfirmationPopup />
-      <OrderConfirm image={car2} />
+      <StatusHandler
+        error={error}
+        isError={isError}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      >
+        <OrderConfirm image={car2} />
+      </StatusHandler>
       <OrderInfo
         btnContent={orderConfirmed ? "Отменить" : "Заказать"}
         confirmation={true}

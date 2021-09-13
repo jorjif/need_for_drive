@@ -110,14 +110,16 @@ export const databaseApi = createApi({
           headers: {
             "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
             Authorization: "Bearer 4cbcea96de",
+            "Content-Type": "application/json",
           },
+
           body: orderDetails,
         };
       },
     }),
-    getOrder: builders.query({
+    getOrderStatus: builders.query({
       query: () => ({
-        url: "db/order",
+        url: "db/orderStatus",
         method: "GET",
         headers: {
           "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
@@ -132,5 +134,6 @@ export const {
   useGetCarsQuery,
   useGetTariffInfoQuery,
   useGetAdressInfoQuery,
-  useGetOrderQuery,
+  useGetOrderStatusQuery,
+  usePostOrderQuery,
 } = databaseApi;

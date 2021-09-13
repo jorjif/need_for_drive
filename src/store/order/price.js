@@ -9,10 +9,10 @@ const priceSlice = createSlice({
   initialState,
   reducers: {
     setStartPrice(state, action) {
-      state.startPrice = action.payload;
+      state.startPrice = Number(action.payload);
     },
     setMaxPrice(state, action) {
-      state.maxPrice = action.payload;
+      state.maxPrice = Number(action.payload);
     },
     addPrice(state, action) {
       state.startPrice += Number(action.payload);
