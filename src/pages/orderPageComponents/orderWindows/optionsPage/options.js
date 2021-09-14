@@ -17,7 +17,7 @@ import dateDifference from "./dateDifference";
 import { useGetTariffInfoQuery } from "../../../../store/order/carStore";
 import CheckboxBtn from "../commonComponents/checkboxBtn";
 import RadioButton from "../commonComponents/radioBtn";
-import { format } from "date-fns";
+//import { format } from "date-fns";
 import { addPrice } from "../../../../store/order/price";
 
 export default function Options() {
@@ -36,8 +36,8 @@ export default function Options() {
   useEffect(() => {
     //если начальная дата меньше конечной - отправляет значение в стор, пропускает в следующий шаг
     if (dateFrom < dateTo) {
-      const formatedDateTo = format(dateTo, "dd/MM/yyyy HH:mm").toString();
-      const formatedDateFrom = format(dateFrom, "dd/MM/yyyy HH:mm").toString();
+      const formatedDateTo = dateTo.getTime();
+      const formatedDateFrom = dateFrom.getTime();
       dispatch(changeStartDate(formatedDateFrom));
       dispatch(changeEndDate(formatedDateTo));
       const difference = dateDifference(dateFrom, dateTo);

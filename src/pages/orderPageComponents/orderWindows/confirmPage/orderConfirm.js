@@ -5,15 +5,16 @@ import {
   useGetOrderStatusQuery,
   usePostOrderQuery,
 } from "../../../../store/order/carStore";
+import { format } from "date-fns";
 
 export default function OrderConfirm() {
   const { carModel, carImg, plate, fuel } = useSelector((store) => store.car);
-  const { from } = useSelector((store) => store.options.date);
+  const { from, to } = useSelector((store) => store.options.date);
   const dispatch = useDispatch();
   //данные для заказа
   const { cityId, pointId } = useSelector((store) => store.adress);
   const { id } = useSelector((store) => store.car);
-  const { date, color, tariffId, isFullTank, isNeedChildChair, isRightWheel } =
+  const { color, tariffId, isFullTank, isNeedChildChair, isRightWheel } =
     useSelector((store) => store.options);
   const { startPrice } = useSelector((store) => store.price);
   const { orderConfirmed } = useSelector((store) => store.status);
@@ -26,8 +27,8 @@ export default function OrderConfirm() {
       pointId: { id: pointId },
       carId: { id: id },
       color: color,
-      dateFrom: date.from,
-      dateTo: 0,
+      dateFrom: from,
+      dateTo: to,
       rateId: { id: tariffId },
       price: startPrice,
       isFullTank: isFullTank.status,
@@ -53,7 +54,7 @@ export default function OrderConfirm() {
         </p>
         <p className="order_confirm_info_additional">
           <span>Доступна с </span>
-          {from}
+          {format(from, "dd/MM/yyyy HH:mm").toString()}
         </p>
       </div>
       <div className="order_confirm_car">
