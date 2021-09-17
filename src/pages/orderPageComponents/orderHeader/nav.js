@@ -3,7 +3,7 @@ import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function NavbarElement() {
   const adressStatus = useSelector((store) => store.adress.status);
@@ -11,9 +11,12 @@ function NavbarElement() {
   const optionsStatus = useSelector((store) => store.options.status);
   const confirmationStatus = useSelector((store) => store.status.status);
   const isConfirmed = useSelector((store) => store.status.orderConfirmed);
-  const { id } = useParams();
-
-  useEffect(() => {}, [id]);
+  const [id, setId] = useState("");
+  useEffect(() => {
+    const url = document.URL;
+    const orderId = url.split("/");
+    setId(orderId[orderId.length - 1]);
+  });
 
   function classForMenu(status) {
     return classNames({
