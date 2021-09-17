@@ -5,7 +5,7 @@
  * @returns разницу между датами в днях-часах
  */
 function dateDifference(dateFrom, dateTo) {
-  const difference = dateTo.getTime() - dateFrom.getTime();
+  const difference = dateTo - dateFrom;
   const msInHour = 3600000;
   const hours = Math.floor(difference / msInHour);
   const days = Math.floor(hours / 24);

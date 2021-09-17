@@ -19,6 +19,7 @@ import CheckboxBtn from "../commonComponents/checkboxBtn";
 import RadioButton from "../commonComponents/radioBtn";
 //import { format } from "date-fns";
 import { addPrice } from "../../../../store/order/price";
+import { shouldStateLoad } from "../../../../store/order/confirmation";
 
 export default function Options() {
   const [dateFrom, setDateFrom] = useState(new Date());
@@ -30,7 +31,10 @@ export default function Options() {
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
-    return () => dispatch(changeStatus("complete"));
+    return () => {
+      dispatch(changeStatus("complete"));
+      dispatch(shouldStateLoad(false));
+    };
   }, [dispatch]);
 
   useEffect(() => {

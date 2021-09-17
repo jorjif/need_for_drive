@@ -127,6 +127,19 @@ export const databaseApi = createApi({
         },
       }),
     }),
+    getOrder: builders.query({
+      query: (id) => {
+        return {
+          url: `db/order/${id}`,
+          method: "GET",
+          headers: {
+            "X-Api-Factory-Application-Id": "5e25c641099b810b946c5d5b",
+            Authorization: "Bearer 4cbcea96de",
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -136,4 +149,5 @@ export const {
   useGetAdressInfoQuery,
   useGetOrderStatusQuery,
   usePostOrderQuery,
+  useGetOrderQuery,
 } = databaseApi;

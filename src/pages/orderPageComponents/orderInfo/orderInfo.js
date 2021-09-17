@@ -19,7 +19,10 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
     const orderInfoArr = [adressInfo, carInfo, optionsInfo];
     //фильтрует массив оставляя только выполненные
     const completedSteps = orderInfoArr.filter(
-      (step) => step.status === "complete" || step.status === "in progress"
+      (step) =>
+        step.status === "complete" ||
+        step.status === "in progress" ||
+        step.status === "loaded"
     );
     //объект с заказом через который затем будет итерироваться цикл
     let order = {};

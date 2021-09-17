@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const dateFrom = new Date().toDateString();
-const dateTo = new Date().toDateString();
+const dateFrom = new Date().getTime();
+const dateTo = new Date().getTime();
 const initialState = {
   color: "",
   date: {

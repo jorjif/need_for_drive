@@ -12,9 +12,11 @@ export default function OrderConfirmPage() {
   const { orderConfirmed } = useSelector((store) => store.status);
   const { error, isLoading, isFetching, isError } = useGetOrderStatusQuery();
   const dispatch = useDispatch();
+
   function confirmEvent() {
     dispatch(confirmOrder(false));
   }
+
   function handleOpen() {
     dispatch(popupCloseOpen(true));
   }
@@ -28,7 +30,7 @@ export default function OrderConfirmPage() {
         isLoading={isLoading}
         isFetching={isFetching}
       >
-        <OrderConfirm image={car2} />
+        <OrderConfirm />
       </StatusHandler>
       <OrderInfo
         btnContent={orderConfirmed ? "Отменить" : "Заказать"}

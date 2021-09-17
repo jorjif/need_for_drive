@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function NavbarElement() {
   const adressStatus = useSelector((store) => store.adress.status);
@@ -9,6 +11,9 @@ function NavbarElement() {
   const optionsStatus = useSelector((store) => store.options.status);
   const confirmationStatus = useSelector((store) => store.status.status);
   const isConfirmed = useSelector((store) => store.status.orderConfirmed);
+  const { id } = useParams();
+
+  useEffect(() => {}, [id]);
 
   function classForMenu(status) {
     return classNames({
@@ -18,19 +23,21 @@ function NavbarElement() {
       order_header_nav_element_blocked: status === "blocked",
     });
   }
-  if (isConfirmed) {
-    return (
-      <nav className="order_header_nav">
-        <p className="order_header_nav_element_first_order-number">
-          Номер заказа RU{Math.floor(Math.random() * 10000)}
-        </p>
-      </nav>
-    );
-  }
+
   function isDisabled(e, status) {
     if (status === "blocked") {
       e.preventDefault();
     }
+  }
+
+  if (isConfirmed) {
+    return (
+      <nav className="order_header_nav">
+        <p className="order_header_nav_element_first_order-number">
+          Номер заказа RU {id}
+        </p>
+      </nav>
+    );
   }
 
   return (

@@ -16,7 +16,7 @@ export default function OptionsPage() {
       >
         <Options />
       </StatusHandler>
-      <OrderInfo btnContent="Итого" link="/order/confirm" />
+      <OrderInfo btnContent="Итого" link="/order/confirm/" />
     </div>
   );
 }
