@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { ReactComponent as Arrow } from "../../icons/orderArrow.svg";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function NavbarElement() {
@@ -16,7 +15,7 @@ function NavbarElement() {
     const url = document.URL;
     const orderId = url.split("/");
     setId(orderId[orderId.length - 1]);
-  });
+  }, []);
 
   function classForMenu(status) {
     return classNames({
