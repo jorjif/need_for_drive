@@ -1,7 +1,6 @@
 import OrderInfo from "../../orderInfo/orderInfo";
 import OrderConfirm from "./orderConfirm";
 import ConfirmationPopup from "./orderConfirmPopup";
-import car2 from "../images/2.png";
 import "./orderConfirm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmOrder, popupCloseOpen } from "../../../../store/order/confirmation";
