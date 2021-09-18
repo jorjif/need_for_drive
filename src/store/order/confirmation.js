@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   popupOpen: false,
   orderConfirmed: false,
+  stateShouldLoad: true,
   status: "blocked",
 };
 
@@ -21,8 +22,11 @@ const confirmationSlice = createSlice({
     confirmOrder(store, action) {
       store.orderConfirmed = action.payload;
     },
+    shouldStateLoad(store, action) {
+      store.stateShouldLoad = action.payload;
+    },
   },
 });
-export const { popupCloseOpen, confirmOrder, changeStatus } =
+export const { popupCloseOpen, confirmOrder, changeStatus, shouldStateLoad } =
   confirmationSlice.actions;
 export default confirmationSlice.reducer;

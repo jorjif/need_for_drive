@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const dateFrom = new Date().toDateString();
-const dateTo = new Date().toDateString();
+const dateFrom = new Date().getTime();
+const dateTo = new Date().getTime();
 const initialState = {
   color: "",
   date: {
@@ -10,7 +10,23 @@ const initialState = {
     difference: "",
   },
   tariff: "Поминутно",
-  options: {},
+  tariffId: "",
+  isFullTank: {
+    status: false,
+    ruName: "Полный бак",
+    price: 500,
+  },
+  isNeedChildChair: {
+    status: false,
+    ruName: "Детское кресло",
+    price: 200,
+  },
+  isRightWheel: {
+    status: false,
+    ruName: "Правый руль",
+    price: 1600,
+  },
+
   status: "blocked",
 };
 const optionsSlice = createSlice({
@@ -21,26 +37,12 @@ const optionsSlice = createSlice({
       store.color = action.payload;
     },
 
-    addOption(store, action) {
-      return {
-        ...store,
-        options: {
-          ...store.options,
-          [action.payload]: true,
-        },
-      };
-    },
-
-    removeOption(store, action) {
-      store.optionsSlice.options[action.payload] = false;
-    },
-
     changeStartDate({ date }, action) {
-      date.from = action.payload.toDateString();
+      date.from = action.payload;
     },
 
     changeEndDate({ date }, action) {
-      date.to = action.payload.toDateString();
+      date.to = action.payload;
     },
 
     changeDateDifference(store, action) {
@@ -49,6 +51,21 @@ const optionsSlice = createSlice({
 
     changeTariff(store, action) {
       store.tariff = action.payload;
+    },
+    changeTariffId(store, action) {
+      store.tariffId = action.payload;
+    },
+
+    setOption(store, action) {
+      if (action.payload === "fullTank") {
+        store.isFullTank.status = !store.isFullTank.status;
+      }
+      if (action.payload === "needChildChair") {
+        store.isNeedChildChair.status = !store.isNeedChildChair.status;
+      }
+      if (action.payload === "rightWheel") {
+        store.isRightWheel.status = !store.isRightWheel.status;
+      }
     },
 
     changeStatus(state, action) {
@@ -63,7 +80,9 @@ export const {
   changeColor,
   changeDateDifference,
   changeTariff,
+  changeTariffId,
   addOption,
   removeOption,
+  setOption,
 } = optionsSlice.actions;
 export default optionsSlice.reducer;

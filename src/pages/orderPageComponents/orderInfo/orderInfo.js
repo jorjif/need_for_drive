@@ -6,17 +6,24 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
-  const [orderList, setOrderList] = useState([]); //массив с OrderOptions - деталями заказа, который составляет пользователь
+  //массив с OrderOptions - деталями заказа, который составляет пользователь
+  const [orderList, setOrderList] = useState([]);
   const accessToNext = useSelector((store) => store.access.access);
   const adressInfo = useSelector((store) => store.adress);
   const carInfo = useSelector((store) => store.car);
   const optionsInfo = useSelector((store) => store.options);
+  const { startPrice, maxPrice } = useSelector((store) => store.price);
 
   useEffect(() => {
     //создает массив из частей стора с данными
     const orderInfoArr = [adressInfo, carInfo, optionsInfo];
     //фильтрует массив оставляя только выполненные
-    const completedSteps = orderInfoArr.filter((step) => step.status === "complete");
+    const completedSteps = orderInfoArr.filter(
+      (step) =>
+        step.status === "complete" ||
+        step.status === "in progress" ||
+        step.status === "loaded"
+    );
     //объект с заказом через который затем будет итерироваться цикл
     let order = {};
     completedSteps.forEach((info, index) => {
@@ -35,20 +42,18 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
           };
           break;
         case 2:
-          //опции - объект внутри массива
-          const options = Object.keys(info.options);
-          //модифицируем объект так, чтоб каждый ключ имел значение да
-          const optionsObj = options.reduce((accum, option) => {
-            return { ...accum, [option]: "Да" };
-          }, {});
+          const { color, date, tariff, isFullTank, isNeedChildChair, isRightWheel } =
+            info;
+
           order = {
             ...order,
-            Цвет: info.color,
-            "Длительность аренды": info.date.difference,
-            Тариф: info.tariff,
-            ...optionsObj,
+            Цвет: color,
+            "Длительность аренды": date.difference,
+            Тариф: tariff,
+            [`${isFullTank.ruName}`]: isFullTank.status ? "да" : "нет",
+            [`${isNeedChildChair.ruName}`]: isNeedChildChair.status ? "да" : "нет",
+            [`${isRightWheel.ruName}`]: isRightWheel.status ? "да" : "нет",
           };
-          console.table(order);
           break;
         default:
           break;
@@ -62,7 +67,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
       const orderOption = (
         <OrderOptions key={key} optionName={key} optionValue={value} />
       );
-      orderArr.push(orderOption);
+      orderArr = orderArr.concat(orderOption);
     }
 
     setOrderList([...orderArr]);
@@ -117,7 +122,7 @@ function OrderInfo({ btnContent, btnClick, confirmation, link, form }) {
       </div>
       <div className="order_price_final">
         <p>
-          <span>Цена:</span> от 8 000 до 12 000
+          <span>Цена:</span> {startPrice ? `от ${startPrice} до ${maxPrice}` : ""}
         </p>
         {buttonType()}
       </div>

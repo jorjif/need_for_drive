@@ -1,5 +1,4 @@
 import { ReactComponent as Delete } from "../../../icons/deleteCross.svg";
-import Map from "../../../icons/orderMap.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
   cityChanged,
@@ -8,47 +7,52 @@ import {
 } from "../../../../store/order/adress";
 import { userAccess } from "../../../../store/order/orderAcess";
 import { useEffect, useState } from "react";
+import { useGetAdressInfoQuery } from "../../../../store/order/carStore";
+import MapElem from "./map";
+
 function AdressSelect() {
   const [cityInput, setCityInput] = useState("");
   const [streetInput, setStreetInput] = useState("");
   const { city, street } = useSelector((store) => store.adress);
   const dispatch = useDispatch();
+  const { data } = useGetAdressInfoQuery();
   //useEffect при маунте и анмаунте компонента устанавливает его статус
   useEffect(() => {
     dispatch(changeStatus("in progress"));
+    setCityInput(city);
+    setStreetInput(street);
     return () => dispatch(changeStatus("complete"));
   }, []);
-  const datalist = [
-    { city: "Ульяновск", street: ["Нариманова 42", "Крымова 8"] },
-    { city: "Краснодар", street: ["Московская 2", "Красная 154"] },
-  ];
+
   //useEffect для проверки допуска на следующий шаг и отправки значений в стор
   useEffect(() => {
     //проверяет соответствует ли инпут доступным городам
-    const comparedCity = datalist.find((elem) => elem.city === cityInput);
-    const comparedStreet = datalist.find(
-      (elem) => (elem.city === cityInput) & elem.street.includes(streetInput)
+    const comparedCity = data.find((elem) => elem.city === cityInput);
+    const comparedStreet = comparedCity?.streets.find(
+      ({ street }) => street === streetInput
     );
     //если инпут соответствует - отправляет стейт в стор
     if (comparedCity) {
-      dispatch(cityChanged(cityInput));
+      dispatch(cityChanged({ name: cityInput, id: comparedCity.id }));
     }
     //если город выставлен, но изменен на неверное значение - стор отчищается
     if (city && !comparedCity) {
-      dispatch(cityChanged(""));
+      dispatch(cityChanged({ name: "", id: "" }));
     }
     if (comparedStreet) {
-      dispatch(streetChanged(streetInput));
+      dispatch(streetChanged({ name: streetInput, id: comparedStreet.id }));
     }
     if (street && !comparedStreet) {
-      dispatch(streetChanged(""));
+      dispatch(streetChanged({ name: "", id: "" }));
     }
+    // eslint-disable-next-line
   }, [streetInput, cityInput]);
   useEffect(() => {
     if (street && city) {
       dispatch(userAccess(true));
     }
   });
+  useEffect(() => {}, []);
   function cityOnChange(e) {
     const value = e.target.value;
     setCityInput(value);
@@ -62,11 +66,11 @@ function AdressSelect() {
     e.preventDefault();
     if (type === "city") {
       setCityInput("");
-      dispatch(cityChanged(""));
+      dispatch(cityChanged({ name: "", id: "" }));
       return;
     }
     setStreetInput("");
-    dispatch(streetChanged(""));
+    dispatch(streetChanged({ name: "", id: "" }));
   }
 
   function onSubmit(e) {
@@ -75,8 +79,8 @@ function AdressSelect() {
 
   function optionsWithCity(adressArr) {
     const cityIndex = adressArr.find((elem) => elem.city === city);
-    return cityIndex?.street.map((streetElem) => (
-      <option value={streetElem} key={streetElem} />
+    return cityIndex?.streets.map(({ street, id }) => (
+      <option value={street} key={id} />
     ));
   }
   return (
@@ -92,8 +96,8 @@ function AdressSelect() {
             required
           />
           <datalist id="order_adress_city">
-            {datalist.map((adressObj) => {
-              return <option value={adressObj.city} key={adressObj.city} />;
+            {data.map((adressObj) => {
+              return <option value={adressObj.city} key={adressObj.id} />;
             })}
           </datalist>
           <button
@@ -112,7 +116,7 @@ function AdressSelect() {
             onChange={streetOnChange}
             required
           />
-          <datalist id="order_adress_street">{optionsWithCity(datalist)}</datalist>
+          <datalist id="order_adress_street">{optionsWithCity(data)}</datalist>
           <button
             className="order_adress_search_input_delete street"
             onClick={deleteButtonClick}
@@ -123,11 +127,7 @@ function AdressSelect() {
       </form>
       <div className="order_adress_map">
         <p>Пункт выдачи</p>
-        <img
-          className="order_adress_map_map"
-          src={Map}
-          alt="карта выбора места посадки"
-        />
+        <MapElem data={data} />
       </div>
     </div>
   );

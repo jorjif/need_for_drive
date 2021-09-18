@@ -1,5 +1,4 @@
 import { ReactComponent as Delete } from "../../../icons/deleteCross.svg";
-import { ReactComponent as CheckboxMark } from "../../../icons/checkboxMark.svg";
 import DateTimePicker from "react-datetime-picker";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,31 +9,41 @@ import {
   changeEndDate,
   changeDateDifference,
   changeTariff,
-  addOption,
+  changeTariffId,
+  setOption,
 } from "../../../../store/order/options";
-import { format } from "date-fns/fp";
 import { userAccess } from "../../../../store/order/orderAcess";
 import dateDifference from "./dateDifference";
+import { useGetTariffInfoQuery } from "../../../../store/order/carStore";
+import CheckboxBtn from "../commonComponents/checkboxBtn";
+import RadioButton from "../commonComponents/radioBtn";
+//import { format } from "date-fns";
+import { addPrice } from "../../../../store/order/price";
+import { shouldStateLoad } from "../../../../store/order/confirmation";
+
 export default function Options() {
   const [dateFrom, setDateFrom] = useState(new Date());
   const [dateTo, setDateTo] = useState(new Date());
   const { color, tariff } = useSelector((store) => store.options);
-  const storeForOptions = useSelector((store) => store.options);
+  const { colors } = useSelector((store) => store.car);
+  const { data } = useGetTariffInfoQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(changeStatus("in progress"));
-    return () => dispatch(changeStatus("complete"));
-    // eslint-disable-next-line
-  }, []);
+    return () => {
+      dispatch(changeStatus("complete"));
+      dispatch(shouldStateLoad(false));
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     //если начальная дата меньше конечной - отправляет значение в стор, пропускает в следующий шаг
     if (dateFrom < dateTo) {
-      /*const formatFrom = format(dateFrom, "dd/MM/yyyy hh:mm");
-      const formatTo = format(dateTo, "dd/MM/yyyy hh:mm");*/
-      dispatch(changeStartDate(dateFrom));
-      dispatch(changeEndDate(dateTo));
+      const formatedDateTo = dateTo.getTime();
+      const formatedDateFrom = dateFrom.getTime();
+      dispatch(changeStartDate(formatedDateFrom));
+      dispatch(changeEndDate(formatedDateTo));
       const difference = dateDifference(dateFrom, dateTo);
       dispatch(changeDateDifference(difference));
       dispatch(userAccess(true));
@@ -43,28 +52,22 @@ export default function Options() {
     if (dateFrom > dateTo) {
       dispatch(userAccess(false));
     }
-    // eslint-disable-next-line
-  }, [dateFrom, dateTo]);
+  }, [dateFrom, dateTo, dispatch]);
 
   function getColor(e) {
     dispatch(changeColor(e.target.value));
   }
 
-  function getTariff(e) {
+  function getTariff(e, id) {
     dispatch(changeTariff(e.target.value));
-  }
-  function addOptionEvent(e) {
-    /*const hasProp = storeForOptions[e.target.name];
-    if (hasProp) {
-      dispatch(removeOption(e.target.name));
-      return;
-    }*/
-    dispatch(addOption(e.target.name));
+    dispatch(changeTariffId(id));
   }
 
-  function checkOption(e) {
-    return storeForOptions[e.target.name];
+  function setOptionEvent(e) {
+    dispatch(setOption(e.target.name));
+    dispatch(addPrice(e.target.value));
   }
+
   return (
     <div className="order_options">
       <form>
@@ -72,51 +75,29 @@ export default function Options() {
           <fieldset name="цвет">
             <legend>Цвет:</legend>
             <div className="order_options_color_inpField">
-              <label className="radio_container" htmlFor="any">
-                <input
-                  type="radio"
-                  name="color"
-                  id="any"
-                  value=""
-                  className="order_radio"
-                  checked={color === ""}
-                  onChange={getColor}
-                />
-                <label htmlFor="any" className="radio_label">
-                  Любой
-                </label>
-                <span className="radio_checkmark"></span>
-              </label>
-              <label className="radio_container">
-                <input
-                  type="radio"
-                  name="color"
-                  id="red"
-                  value="красный"
-                  className="order_radio"
-                  checked={color === "красный"}
-                  onChange={getColor}
-                />
-                <label htmlFor="red" className="radio_label">
-                  Красный
-                </label>
-                <span className="radio_checkmark"></span>
-              </label>
-              <label className="radio_container">
-                <input
-                  type="radio"
-                  name="color"
-                  id="blue"
-                  value="синий"
-                  className="order_radio"
-                  checked={color === "синий"}
-                  onChange={getColor}
-                />
-                <label htmlFor="blue" className="radio_label">
-                  Синий
-                </label>
-                <span className="radio_checkmark"></span>
-              </label>
+              <RadioButton
+                name="color"
+                id="any"
+                value=""
+                checked={!color}
+                onChange={getColor}
+              >
+                Любой
+              </RadioButton>
+              {colors.map((colorOfCar) => {
+                return (
+                  <RadioButton
+                    name="color"
+                    id={colorOfCar}
+                    value={colorOfCar}
+                    checked={colorOfCar === color}
+                    onChange={getColor}
+                    key={colorOfCar}
+                  >
+                    {colorOfCar}
+                  </RadioButton>
+                );
+              })}
             </div>
           </fieldset>
         </div>
@@ -158,92 +139,60 @@ export default function Options() {
         <div className="order_options_tariff">
           <fieldset>
             <legend>Тариф</legend>
-            <label className="radio_container" htmlFor="minute">
-              <input
-                checked={tariff === "Поминутно"}
-                type="radio"
-                name="tariff"
-                id="minute"
-                value="Поминутно"
-                className="order_radio"
-                onChange={getTariff}
-              />
-              <label htmlFor="minute" className="radio_label">
-                Поминутно, 7₽/мин
-              </label>
-              <span className="radio_checkmark"></span>
-            </label>
-            <label className="radio_container" htmlFor="day">
-              <input
-                type="radio"
-                name="tariff"
-                id="day"
-                value="На день"
-                className="order_radio"
-                checked={tariff === "На день"}
-                onChange={getTariff}
-              />
-              <label htmlFor="day" className="radio_label">
-                На сутки, 1999₽/сутки
-              </label>
-              <span className="radio_checkmark"></span>
-            </label>
+            {
+              //
+              data.data.map((tariffUnit) => {
+                const {
+                  price,
+                  rateTypeId: { name, unit },
+                  id,
+                } = tariffUnit;
+                return (
+                  <RadioButton
+                    name="tariff"
+                    id={name}
+                    value={name}
+                    checked={tariff === name}
+                    onChange={(e) => {
+                      getTariff(e, id);
+                    }}
+                    key={id}
+                  >{`${name}, ${price}₽/${unit}`}</RadioButton>
+                );
+              })
+            }
           </fieldset>
         </div>
         <div className="order_options_options">
           <fieldset>
             <legend>Доп услуги</legend>
-            <label htmlFor="full" className="checkbox">
-              <span className="checkbox_input">
-                <input
-                  type="checkbox"
-                  id="full"
-                  name="полный бак"
-                  value="да"
-                  onClick={addOptionEvent}
-                />
-                <span className="checkbox_control">
-                  <CheckboxMark />
-                </span>
-              </span>
-              <label htmlFor="full" className="checkbox_label">
-                Полный бак, 500р
-              </label>
-            </label>
-            <label htmlFor="childseat" className="checkbox">
-              <span className="checkbox_input">
-                <input
-                  type="checkbox"
-                  id="childseat"
-                  name="детское кресло"
-                  value="да"
-                  onClick={addOptionEvent}
-                />
-                <span className="checkbox_control">
-                  <CheckboxMark />
-                </span>
-              </span>
-              <label htmlFor="childseat" className="checkbox_label">
-                Детское кресло, 200р
-              </label>
-            </label>
-            <label htmlFor="jdm" className="checkbox">
-              <span className="checkbox_input">
-                <input
-                  type="checkbox"
-                  id="jdm"
-                  name="правый руль"
-                  value="да"
-                  onClick={addOptionEvent}
-                />
-                <span className="checkbox_control">
-                  <CheckboxMark />
-                </span>
-              </span>
-              <label htmlFor="jdm" className="checkbox_label">
-                Правый руль, 1600р
-              </label>
-            </label>
+            <CheckboxBtn
+              type="checkbox"
+              id="full"
+              name="fullTank"
+              value="500"
+              onChange={setOptionEvent}
+            >
+              Полный бак, 500р
+            </CheckboxBtn>
+            <CheckboxBtn
+              type="checkbox"
+              id="childseat"
+              name="needChildChair"
+              value="200"
+              onChange={setOptionEvent}
+            >
+              Детское кресло, 200р
+            </CheckboxBtn>
+            <CheckboxBtn
+              type="checkbox"
+              id="jdm"
+              name="rightWheel"
+              value="1600"
+              onChange={setOptionEvent}
+            >
+              Правый руль, 1600р
+            </CheckboxBtn>
           </fieldset>
         </div>
       </form>

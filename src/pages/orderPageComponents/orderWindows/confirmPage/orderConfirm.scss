@@ -45,9 +45,13 @@
   &_car {
     max-width: 256px;
     height: auto;
+    img {
+      margin-top: 32px;
+      max-width: 256px;
+    }
   }
   &_popup {
-    position: absolute;
+    position: fixed;
     left: 0;
     z-index: 999;
     top: 0;

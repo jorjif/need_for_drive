@@ -1,16 +1,22 @@
 import OrderInfo from "../../orderInfo/orderInfo";
 import CarSelect from "./carSelect";
+import StatusHandler from "../commonComponents/statushandlerPage";
+import { useGetCarsQuery } from "../../../../store/order/carStore";
 import "./carSelect.scss";
 
 function CarsPage() {
-  const order = {
-    "Пункт выдачи": "Ульяновск, Нариманова\u00A042",
-    Модель: "Hyundai,\u00A0i30N",
-  };
+  const { error, isLoading, isFetching, isError } = useGetCarsQuery();
   return (
     <div className="page_order_content">
-      <CarSelect />
-      <OrderInfo btnContent="Дополнительно" order={order} link="/order/options" />
+      <StatusHandler
+        error={error}
+        isError={isError}
+        isLoading={isLoading}
+        isFetching={isFetching}
+      >
+        <CarSelect />
+      </StatusHandler>
+      <OrderInfo btnContent="Дополнительно" link="/order/options" />
     </div>
   );
 }
